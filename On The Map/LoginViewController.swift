@@ -10,6 +10,9 @@ import UIKit
 
 class LoginViewController : UIViewController {
     
+    @IBOutlet weak var usernameTextField: PaddingTextField!
+    @IBOutlet weak var passwordTextField: PaddingTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,6 +22,7 @@ class LoginViewController : UIViewController {
         gradient.frame = self.view.bounds
         gradient.colors = [UIColor(red: 250.0/255.0, green: 172.0/255.0, blue: 135.0/255.0, alpha: 1.0).CGColor, UIColor(red: 247.0/255.0, green: 140.0/255.0, blue: 53.0/255.0, alpha: 1.0).CGColor]
         self.view.layer.insertSublayer(gradient, atIndex: 0)
+        
     }
     
     override func shouldAutorotate() -> Bool {
