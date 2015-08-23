@@ -13,6 +13,7 @@
 		E972A5EF1B895D50006A1054 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E972A5EE1B895D50006A1054 /* Images.xcassets */; };
 		E972A5F21B895D50006A1054 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972A5F01B895D50006A1054 /* LaunchScreen.xib */; };
 		E972A5FE1B895D50006A1054 /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972A5FD1B895D50006A1054 /* On_The_MapTests.swift */; };
+		E99FA4311B8A3E0B00B6A720 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99FA4301B8A3E0B00B6A720 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,10 @@
 		E972A5F71B895D50006A1054 /* On The MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E972A5FC1B895D50006A1054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E972A5FD1B895D50006A1054 /* On_The_MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = On_The_MapTests.swift; sourceTree = "<group>"; };
+		E99FA4301B8A3E0B00B6A720 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E99FA4331B8A3FA300B6A720 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		E99FA4341B8A3FA300B6A720 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		E99FA4351B8A3FA300B6A720 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +82,11 @@
 		E972A5E41B895D50006A1054 /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				E99FA4321B8A3F8D00B6A720 /* Resources */,
+				E99FA42F1B8A3DE000B6A720 /* Model */,
+				E99FA42E1B8A3DD900B6A720 /* View */,
+				E99FA42D1B8A3DCE00B6A720 /* Controller */,
 				E972A5E71B895D50006A1054 /* AppDelegate.swift */,
-				E972A5E91B895D50006A1054 /* ViewController.swift */,
 				E972A5EB1B895D50006A1054 /* Main.storyboard */,
 				E972A5EE1B895D50006A1054 /* Images.xcassets */,
 				E972A5F01B895D50006A1054 /* LaunchScreen.xib */,
@@ -110,6 +118,39 @@
 				E972A5FC1B895D50006A1054 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E99FA42D1B8A3DCE00B6A720 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E99FA42E1B8A3DD900B6A720 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E972A5E91B895D50006A1054 /* ViewController.swift */,
+				E99FA4301B8A3E0B00B6A720 /* LoginViewController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E99FA42F1B8A3DE000B6A720 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E99FA4321B8A3F8D00B6A720 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E99FA4331B8A3FA300B6A720 /* Roboto-Medium.ttf */,
+				E99FA4341B8A3FA300B6A720 /* Roboto-Regular.ttf */,
+				E99FA4351B8A3FA300B6A720 /* Roboto-Thin.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +255,7 @@
 			files = (
 				E972A5EA1B895D50006A1054 /* ViewController.swift in Sources */,
 				E972A5E81B895D50006A1054 /* AppDelegate.swift in Sources */,
+				E99FA4311B8A3E0B00B6A720 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +451,7 @@
 				E972A6031B895D50006A1054 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E972A6041B895D50006A1054 /* Build configuration list for PBXNativeTarget "On The MapTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +460,7 @@
 				E972A6061B895D50006A1054 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
