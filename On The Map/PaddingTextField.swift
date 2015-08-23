@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  PaddingTextField.swift
 //  On The Map
 //
 //  Created by Luis Yoshida on 8/23/15.
@@ -9,6 +9,8 @@
 import UIKit
 
 class PaddingTextField : UITextField {
+    // Extends the default UITextField adding a left padding.
+    
     var leftMargin : CGFloat = 10.0
     
     override func textRectForBounds(bounds: CGRect) -> CGRect {
