@@ -10,7 +10,13 @@ import Foundation
 
 class OTMClient : NSObject {
     
-    var session : NSURLSession = NSURLSession.sharedSession()
+    var session : NSURLSession
+    
+    override init() {
+        
+        session = NSURLSession.sharedSession()
+        super.init()
+    }
     
     func taskForGETMethod(method: String, parameters: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
@@ -34,10 +40,16 @@ class OTMClient : NSObject {
         return task
     }
     
-    func taskForPOSTMethod(method: String, parameters: [String: AnyObject], jsonBody: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(method: String, parameters: [String: AnyObject]?, jsonBody: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
+        var urlString : String
         // Build the URL
-        let urlString = "\(Constants.baseUrl)\(method)\(OTMClient.escapedParameters(parameters))"
+        if let params = parameters {
+            urlString = "\(Constants.baseUrl)\(method)\(OTMClient.escapedParameters(params))"
+        } else {
+            urlString = "\(Constants.baseUrl)\(method)"
+        }
+        
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         var jsonifyError: NSError? = nil
@@ -92,7 +104,9 @@ class OTMClient : NSObject {
         
         var parsingError: NSError? = nil
         
-        let parsedResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
+        let newData = data.subdataWithRange(NSMakeRange(5, data.length-5))
+        
+        let parsedResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
         
         if let error = parsingError {
             completionHandler(result: nil, error: error)

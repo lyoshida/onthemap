@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="15A262e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="38R-cu-fZ7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -53,9 +54,6 @@
                                 <color key="textColor" red="1" green="0.57319495529999998" blue="0.2170245818" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="0"/>
-                                </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ck-NZ-fdw">
                                 <rect key="frame" x="173" y="346" width="255" height="30"/>
@@ -86,10 +84,14 @@
                                 <color key="textColor" red="1" green="0.57319495529999998" blue="0.2170245818" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="keyPath" value="0"/>
-                                </userDefinedRuntimeAttributes>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-oa-aNv">
+                                <rect key="frame" x="16" y="384" width="568" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,11 +104,15 @@
                             <constraint firstAttribute="centerX" secondItem="jt2-ax-7GW" secondAttribute="centerX" id="M2z-Ul-hPE"/>
                             <constraint firstAttribute="centerX" secondItem="TpR-hV-EEo" secondAttribute="centerX" id="RNZ-fV-Dod"/>
                             <constraint firstItem="jt2-ax-7GW" firstAttribute="top" secondItem="mle-Dw-2mi" secondAttribute="bottom" constant="44" id="RPi-pk-1Ib"/>
+                            <constraint firstItem="5pS-oa-aNv" firstAttribute="trailing" secondItem="M8F-JE-jhh" secondAttribute="trailingMargin" id="iMs-VT-Iq9"/>
+                            <constraint firstItem="5pS-oa-aNv" firstAttribute="leading" secondItem="M8F-JE-jhh" secondAttribute="leadingMargin" id="z4B-Kd-Gi4"/>
+                            <constraint firstItem="5pS-oa-aNv" firstAttribute="top" secondItem="6ck-NZ-fdw" secondAttribute="bottom" constant="8" id="zeR-aa-uon"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="6ck-NZ-fdw" id="W0Y-i2-rug"/>
                         <outlet property="passwordTextField" destination="pFe-OK-gMG" id="Mui-iM-1Q0"/>
+                        <outlet property="statusLabel" destination="5pS-oa-aNv" id="HLY-fu-yfy"/>
                         <outlet property="usernameTextField" destination="TpR-hV-EEo" id="sN9-Q8-kmA"/>
                     </connections>
                 </viewController>

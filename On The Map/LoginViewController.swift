@@ -13,6 +13,7 @@ class LoginViewController : UIViewController {
     @IBOutlet weak var usernameTextField: PaddingTextField!
     @IBOutlet weak var passwordTextField: PaddingTextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var statusLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,27 @@ class LoginViewController : UIViewController {
     }
 
     @IBAction func loginRequest(sender: UIButton) {
-        // TODO: Implement
+        if usernameTextField.text == "" || passwordTextField.text == "" {
+            statusLabel.text = "Please fill your username and password."
+        } else {
+            
+            let method: String = OTMClient.Methods.authUrl
+            let json: [String: [String: String]] = [
+                "udacity": [
+                    "username": usernameTextField.text,
+                    "password": passwordTextField.text
+                ]
+            ]
+            var otmClient = OTMClient()
+            
+            let task = otmClient.taskForPOSTMethod(method, parameters: nil, jsonBody: json) { result, error in
+                
+                if let error = error {
+                    println(error)
+                } else {
+                    println(result)
+                }
+            }
+        }
     }
 }
