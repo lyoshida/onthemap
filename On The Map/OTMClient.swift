@@ -10,7 +10,9 @@ import Foundation
 
 class OTMClient : NSObject {
     
-    var session : NSURLSession
+    var session: NSURLSession
+    
+    var sessionId: String? = nil
     
     override init() {
         
@@ -113,6 +115,16 @@ class OTMClient : NSObject {
         } else {
             completionHandler(result: parsedResult, error: nil)
         }
+    }
+    
+    
+    class func sharedInstance() -> OTMClient {
+        
+        struct Singleton {
+            static var sharedInstance = OTMClient()
+        }
+        
+        return Singleton.sharedInstance
     }
 
 }

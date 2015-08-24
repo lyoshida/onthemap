@@ -41,24 +41,21 @@ class LoginViewController : UIViewController {
         if usernameTextField.text == "" || passwordTextField.text == "" {
             statusLabel.text = "Please fill your username and password."
         } else {
-            
-            let method: String = OTMClient.Methods.authUrl
-            let json: [String: [String: String]] = [
-                "udacity": [
-                    "username": usernameTextField.text,
-                    "password": passwordTextField.text
-                ]
-            ]
-            var otmClient = OTMClient()
-            
-            let task = otmClient.taskForPOSTMethod(method, parameters: nil, jsonBody: json) { result, error in
+            OTMClient.sharedInstance().login(usernameTextField.text, password: passwordTextField.text, completionHandler: { success, statusCode, errorString in
                 
-                if let error = error {
-                    println(error)
+                if success == false {
+                    if let error = errorString {
+                        self.displayMessage(error)
+                    }
                 } else {
-                    println(result)
+                    println(OTMClient.sharedInstance().sessionId)
                 }
-            }
+                
+            })
         }
+    }
+    
+    func displayMessage(message: String) {
+        statusLabel.text = message
     }
 }
