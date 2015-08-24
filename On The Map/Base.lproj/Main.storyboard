@@ -161,13 +161,21 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FPC-Qo-UyC">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <animations/>
+                            </mapView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="FPC-Qo-UyC" secondAttribute="trailing" constant="-16" id="aXc-ia-3q4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zY6-yo-AcS" secondAttribute="trailing" constant="-16" id="aed-vx-U7j"/>
+                            <constraint firstItem="FPC-Qo-UyC" firstAttribute="top" secondItem="SMW-Ju-4Q2" secondAttribute="bottom" constant="44" id="bfo-Jf-IiH"/>
                             <constraint firstItem="zY6-yo-AcS" firstAttribute="top" secondItem="SMW-Ju-4Q2" secondAttribute="bottom" id="i9l-7w-aiv"/>
                             <constraint firstItem="zY6-yo-AcS" firstAttribute="leading" secondItem="4Gy-ZZ-4FN" secondAttribute="leadingMargin" constant="-16" id="iBd-9b-4EP"/>
+                            <constraint firstItem="FPC-Qo-UyC" firstAttribute="leading" secondItem="4Gy-ZZ-4FN" secondAttribute="leadingMargin" constant="-16" id="o2D-73-dht"/>
+                            <constraint firstItem="wFc-w0-zRS" firstAttribute="top" secondItem="FPC-Qo-UyC" secondAttribute="bottom" id="wOt-Xk-lSu"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="mXc-U1-n95"/>

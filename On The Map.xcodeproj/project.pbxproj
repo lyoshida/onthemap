@@ -18,6 +18,7 @@
 		E9C966371B8A9B7B00BFA6FA /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C966361B8A9B7B00BFA6FA /* OTMClient.swift */; };
 		E9C966391B8A9BC400BFA6FA /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */; };
 		E9C9663B1B8BA43B00BFA6FA /* OTMConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9663A1B8BA43B00BFA6FA /* OTMConvenience.swift */; };
+		E9C9663F1B8BD5A900BFA6FA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C9663E1B8BD5A900BFA6FA /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		E9C966361B8A9B7B00BFA6FA /* OTMClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
 		E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
 		E9C9663A1B8BA43B00BFA6FA /* OTMConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConvenience.swift; sourceTree = "<group>"; };
+		E9C9663E1B8BD5A900BFA6FA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C9663F1B8BD5A900BFA6FA /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +75,7 @@
 		E972A5D91B895D50006A1054 = {
 			isa = PBXGroup;
 			children = (
+				E9C9663E1B8BD5A900BFA6FA /* MapKit.framework */,
 				E972A5E41B895D50006A1054 /* On The Map */,
 				E972A5FA1B895D50006A1054 /* On The MapTests */,
 				E972A5E31B895D50006A1054 /* Products */,
@@ -214,6 +218,11 @@
 				TargetAttributes = {
 					E972A5E11B895D50006A1054 = {
 						CreatedOnToolsVersion = 6.3.2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					E972A5F61B895D50006A1054 = {
 						CreatedOnToolsVersion = 6.3.2;
