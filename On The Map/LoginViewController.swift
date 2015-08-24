@@ -48,11 +48,22 @@ class LoginViewController : UIViewController {
                         self.displayMessage(error)
                     }
                 } else {
-                    println(OTMClient.sharedInstance().sessionId)
+                    self.completeLogin()
                 }
                 
             })
         }
+    }
+    
+    func completeLogin() {
+        dispatch_async(dispatch_get_main_queue(), {
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! UITabBarController
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+        
+        })
+        
+        
     }
     
     func displayMessage(message: String) {

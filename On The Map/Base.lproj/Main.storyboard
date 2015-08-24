@@ -5,24 +5,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="O7v-tE-fYa">
             <objects>
@@ -118,10 +100,107 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g18-ui-I3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="495" y="1138"/>
+            <point key="canvasLocation" x="280" y="988"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="Eu2-WA-PG6">
+            <objects>
+                <viewController id="e4u-V5-hjZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o11-5r-Emm"/>
+                        <viewControllerLayoutGuide type="bottom" id="hz2-iU-RLs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kKP-BI-c59">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOD-4I-E3S">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <animations/>
+                                <items>
+                                    <navigationItem title="On The Map" id="g2b-Oc-qpw">
+                                        <barButtonItem key="leftBarButtonItem" image="pin" id="SCL-zO-mBf"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="xIz-ar-cgb"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VOD-4I-E3S" firstAttribute="leading" secondItem="kKP-BI-c59" secondAttribute="leadingMargin" constant="-16" id="HuF-7K-2eR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VOD-4I-E3S" secondAttribute="trailing" constant="-16" id="rW1-3B-O8N"/>
+                            <constraint firstItem="VOD-4I-E3S" firstAttribute="top" secondItem="o11-5r-Emm" secondAttribute="bottom" id="unp-KF-VN0"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="List" image="list" id="Q9Y-FD-xX3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PKl-TH-8ae" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="1319"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="GzQ-PK-AXF">
+            <objects>
+                <viewController id="fwy-Xd-E3j" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SMW-Ju-4Q2"/>
+                        <viewControllerLayoutGuide type="bottom" id="wFc-w0-zRS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Gy-ZZ-4FN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zY6-yo-AcS">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <animations/>
+                                <items>
+                                    <navigationItem title="On The Map" id="gKE-XW-LFP">
+                                        <barButtonItem key="leftBarButtonItem" image="pin" id="AZW-6U-Ap1"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="o0D-eO-LD9"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="zY6-yo-AcS" secondAttribute="trailing" constant="-16" id="aed-vx-U7j"/>
+                            <constraint firstItem="zY6-yo-AcS" firstAttribute="top" secondItem="SMW-Ju-4Q2" secondAttribute="bottom" id="i9l-7w-aiv"/>
+                            <constraint firstItem="zY6-yo-AcS" firstAttribute="leading" secondItem="4Gy-ZZ-4FN" secondAttribute="leadingMargin" constant="-16" id="iBd-9b-4EP"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="mXc-U1-n95"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xq6-ci-NsD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="657"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="3cr-Es-BSw">
+            <objects>
+                <tabBarController storyboardIdentifier="MapViewController" id="BGp-aM-3tu" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="qtN-yP-nmm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="fwy-Xd-E3j" kind="relationship" relationship="viewControllers" id="pD8-6N-ehu"/>
+                        <segue destination="e4u-V5-hjZ" kind="relationship" relationship="viewControllers" id="2WX-wO-NQ7"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ncl-7h-CGT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="988"/>
         </scene>
     </scenes>
     <resources>
+        <image name="list" width="32" height="32"/>
+        <image name="map" width="32" height="32"/>
+        <image name="pin" width="32" height="32"/>
         <image name="udacity" width="256" height="256"/>
     </resources>
 </document>
