@@ -12,6 +12,7 @@ class LoginViewController : UIViewController {
     
     @IBOutlet weak var usernameTextField: PaddingTextField!
     @IBOutlet weak var passwordTextField: PaddingTextField!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class LoginViewController : UIViewController {
         
     }
     
+    // Prevents view to autorotate to landscape mode.
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -34,4 +36,7 @@ class LoginViewController : UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func loginRequest(sender: UIButton) {
+        // TODO: Implement
+    }
 }

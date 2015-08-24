@@ -15,6 +15,8 @@
 		E972A5FE1B895D50006A1054 /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972A5FD1B895D50006A1054 /* On_The_MapTests.swift */; };
 		E99FA4311B8A3E0B00B6A720 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99FA4301B8A3E0B00B6A720 /* LoginViewController.swift */; };
 		E9C966351B8A530C00BFA6FA /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C966341B8A530C00BFA6FA /* PaddingTextField.swift */; };
+		E9C966371B8A9B7B00BFA6FA /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C966361B8A9B7B00BFA6FA /* OTMClient.swift */; };
+		E9C966391B8A9BC400BFA6FA /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		E99FA4341B8A3FA300B6A720 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		E99FA4351B8A3FA300B6A720 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		E9C966341B8A530C00BFA6FA /* PaddingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
+		E9C966361B8A9B7B00BFA6FA /* OTMClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
+		E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +97,6 @@
 				E972A5EE1B895D50006A1054 /* Images.xcassets */,
 				E972A5F01B895D50006A1054 /* LaunchScreen.xib */,
 				E972A5E51B895D50006A1054 /* Supporting Files */,
-				E9C966341B8A530C00BFA6FA /* PaddingTextField.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 		E99FA42E1B8A3DD900B6A720 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E9C966341B8A530C00BFA6FA /* PaddingTextField.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -142,6 +146,8 @@
 		E99FA42F1B8A3DE000B6A720 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E9C966361B8A9B7B00BFA6FA /* OTMClient.swift */,
+				E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -256,8 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C966391B8A9BC400BFA6FA /* OTMConstants.swift in Sources */,
 				E972A5EA1B895D50006A1054 /* ViewController.swift in Sources */,
 				E9C966351B8A530C00BFA6FA /* PaddingTextField.swift in Sources */,
+				E9C966371B8A9B7B00BFA6FA /* OTMClient.swift in Sources */,
 				E972A5E81B895D50006A1054 /* AppDelegate.swift in Sources */,
 				E99FA4311B8A3E0B00B6A720 /* LoginViewController.swift in Sources */,
 			);
