@@ -19,6 +19,9 @@
 		E9C966391B8A9BC400BFA6FA /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */; };
 		E9C9663B1B8BA43B00BFA6FA /* OTMConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9663A1B8BA43B00BFA6FA /* OTMConvenience.swift */; };
 		E9C9663F1B8BD5A900BFA6FA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C9663E1B8BD5A900BFA6FA /* MapKit.framework */; };
+		E9C966401B8BD85300BFA6FA /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99FA4331B8A3FA300B6A720 /* Roboto-Medium.ttf */; };
+		E9C966411B8BD85300BFA6FA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99FA4341B8A3FA300B6A720 /* Roboto-Regular.ttf */; };
+		E9C966421B8BD85300BFA6FA /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99FA4351B8A3FA300B6A720 /* Roboto-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,6 +257,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C966401B8BD85300BFA6FA /* Roboto-Medium.ttf in Resources */,
+				E9C966411B8BD85300BFA6FA /* Roboto-Regular.ttf in Resources */,
+				E9C966421B8BD85300BFA6FA /* Roboto-Thin.ttf in Resources */,
 				E972A5ED1B895D50006A1054 /* Main.storyboard in Resources */,
 				E972A5F21B895D50006A1054 /* LaunchScreen.xib in Resources */,
 				E972A5EF1B895D50006A1054 /* Images.xcassets in Resources */,
