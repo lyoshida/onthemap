@@ -144,10 +144,10 @@
             </objects>
             <point key="canvasLocation" x="1778" y="1319"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Location Controller-->
         <scene sceneID="kjk-E7-YNs">
             <objects>
-                <viewController id="dM3-l2-GJn" sceneMemberID="viewController">
+                <viewController id="dM3-l2-GJn" customClass="MapViewLocationController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2yt-dK-Vg5"/>
                         <viewControllerLayoutGuide type="bottom" id="Ktc-dZ-anc"/>
@@ -180,19 +180,22 @@
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yx4-hH-rvn">
                                 <rect key="frame" x="0.0" y="231" width="600" height="195"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Enter you location here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5e-RT-iOj">
-                                        <rect key="frame" x="179" y="17" width="243" height="21"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter you location here" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7EV-to-pya">
+                                        <rect key="frame" x="84" y="52" width="432" height="30"/>
                                         <animations/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="backgroundColor" red="0.1019607843" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="H5e-RT-iOj" secondAttribute="centerX" id="OxR-DY-fLq"/>
-                                    <constraint firstItem="H5e-RT-iOj" firstAttribute="top" secondItem="Yx4-hH-rvn" secondAttribute="top" constant="17" id="PVr-RT-3Oa"/>
+                                    <constraint firstAttribute="trailing" secondItem="7EV-to-pya" secondAttribute="trailing" constant="16" id="3ln-sr-U0r"/>
+                                    <constraint firstAttribute="centerX" secondItem="7EV-to-pya" secondAttribute="centerX" id="JM4-QS-IGm"/>
+                                    <constraint firstItem="7EV-to-pya" firstAttribute="top" secondItem="Yx4-hH-rvn" secondAttribute="top" constant="52" id="a4P-I2-1Ec"/>
+                                    <constraint firstItem="7EV-to-pya" firstAttribute="leading" secondItem="Yx4-hH-rvn" secondAttribute="leading" constant="16" id="y3n-Xh-afn"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwm-Bi-swI">
@@ -203,13 +206,20 @@
                                     <color key="titleColor" red="0.1019607843" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="findLocation:" destination="dM3-l2-GJn" eventType="touchUpInside" id="d0l-Cy-V3x"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PDc-BZ-I2A">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <animations/>
                                 <items>
                                     <navigationItem id="Z4g-HT-ERO">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="cuG-ze-m2V"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="cuG-ze-m2V">
+                                            <connections>
+                                                <segue destination="BGp-aM-3tu" kind="show" id="gfX-8R-81A"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -232,6 +242,10 @@
                             <constraint firstItem="vwm-Bi-swI" firstAttribute="top" secondItem="Yx4-hH-rvn" secondAttribute="bottom" constant="50" id="vp0-at-GCs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="findLocationButton" destination="vwm-Bi-swI" id="PWT-uw-OW3"/>
+                        <outlet property="locationTextField" destination="7EV-to-pya" id="ftw-7J-GAf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6pa-D6-sFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -240,7 +254,7 @@
         <!--Map-->
         <scene sceneID="GzQ-PK-AXF">
             <objects>
-                <viewController id="fwy-Xd-E3j" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapView" id="fwy-Xd-E3j" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SMW-Ju-4Q2"/>
                         <viewControllerLayoutGuide type="bottom" id="wFc-w0-zRS"/>
@@ -281,6 +295,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="mXc-U1-n95"/>
+                    <connections>
+                        <outlet property="mapView" destination="FPC-Qo-UyC" id="vTE-LP-eF5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xq6-ci-NsD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
