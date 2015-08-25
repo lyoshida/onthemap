@@ -44,3 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// Project Specification
+// https://docs.google.com/document/d/1tPF1tmSzVYPSbpl7_JCeMKglKMIs3dUa4OrSAKEYNAs/pub?embedded=true
+
+// Grading Rubric
+// https://docs.google.com/document/d/14oMyCKfI-NCnOoaR1h7pjqDWkaOTv0lyh9drhanqrJA/pub?embedded=true
+
+// Parse API
+// https://docs.google.com/document/d/1E7JIiRxFR3nBiUUzkKal44l9JkSyqNWvQrNH4pDrOFU/pub?embedded=true
+
+// Udacity API
+// https://docs.google.com/document/d/1MECZgeASBDYrbBg7RlRu9zBBLGd3_kfzsN-0FtURqn0/pub?embedded=true
+
+// Demo
+// https://www.udacity.com/course/viewer#!/c-ud421-nd/l-3675848693/m-3943728695

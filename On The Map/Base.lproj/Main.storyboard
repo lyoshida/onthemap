@@ -110,7 +110,7 @@
         <!--List-->
         <scene sceneID="Eu2-WA-PG6">
             <objects>
-                <viewController id="e4u-V5-hjZ" sceneMemberID="viewController">
+                <viewController id="e4u-V5-hjZ" customClass="StudentTableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o11-5r-Emm"/>
                         <viewControllerLayoutGuide type="bottom" id="hz2-iU-RLs"/>
@@ -129,16 +129,39 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="J5c-Us-QM1">
+                                <rect key="frame" x="-11" y="64" width="611" height="487"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="rfS-E2-RWd">
+                                        <rect key="frame" x="0.0" y="0.0" width="611" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rfS-E2-RWd" id="z3Z-4x-PBG">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="J5c-Us-QM1" firstAttribute="top" secondItem="o11-5r-Emm" secondAttribute="bottom" constant="44" id="0Zn-rB-KjD"/>
                             <constraint firstItem="VOD-4I-E3S" firstAttribute="leading" secondItem="kKP-BI-c59" secondAttribute="leadingMargin" constant="-16" id="HuF-7K-2eR"/>
+                            <constraint firstItem="J5c-Us-QM1" firstAttribute="leading" secondItem="kKP-BI-c59" secondAttribute="leadingMargin" constant="-27" id="oRW-0g-WJd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VOD-4I-E3S" secondAttribute="trailing" constant="-16" id="rW1-3B-O8N"/>
                             <constraint firstItem="VOD-4I-E3S" firstAttribute="top" secondItem="o11-5r-Emm" secondAttribute="bottom" id="unp-KF-VN0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="J5c-Us-QM1" secondAttribute="trailing" constant="-16" id="vUB-Ct-UmU"/>
+                            <constraint firstItem="hz2-iU-RLs" firstAttribute="top" secondItem="J5c-Us-QM1" secondAttribute="bottom" id="w1u-cl-u1c"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" image="list" id="Q9Y-FD-xX3"/>
+                    <connections>
+                        <outlet property="studentTable" destination="J5c-Us-QM1" id="x2P-xo-rFO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PKl-TH-8ae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

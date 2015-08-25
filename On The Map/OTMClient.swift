@@ -20,12 +20,18 @@ class OTMClient : NSObject {
         super.init()
     }
     
-    func taskForGETMethod(method: String, parameters: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForGETMethod(url: String, parameters: [String: AnyObject], headerParams: [String: String]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         // Build the URL
-        let urlString = "\(Constants.baseUrl)\(method)\(OTMClient.escapedParameters(parameters))"
+        let urlString = "\(url)\(OTMClient.escapedParameters(parameters))"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
+        
+        if let headerParams = headerParams {
+            for (key, value) in headerParams {
+                request.addValue(value, forHTTPHeaderField: key)
+            }
+        }
         
         let task = session.dataTaskWithRequest(request) {
             data, response, downloadError in
@@ -42,19 +48,26 @@ class OTMClient : NSObject {
         return task
     }
     
-    func taskForPOSTMethod(method: String, parameters: [String: AnyObject]?, jsonBody: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(url: String, parameters: [String: AnyObject]?, headerParams: [String: String]?, jsonBody: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         var urlString : String
         // Build the URL
         if let params = parameters {
-            urlString = "\(Constants.baseUrl)\(method)\(OTMClient.escapedParameters(params))"
+            urlString = "\(url)\(OTMClient.escapedParameters(params))"
         } else {
-            urlString = "\(Constants.baseUrl)\(method)"
+            urlString = "\(url)"
         }
         
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         var jsonifyError: NSError? = nil
+        
+        // Set header Params
+        if let headerParams = headerParams {
+            for (key, value) in headerParams {
+                request.addValue(value, forHTTPHeaderField: key)
+            }
+        }
         
         // Request setup
         request.HTTPMethod = "POST"
