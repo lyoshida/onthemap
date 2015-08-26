@@ -73,14 +73,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 var alert = UIAlertView(title: "Error", message: "Error retrieving student data.", delegate: self, cancelButtonTitle: "OK")
                 alert.show()
             } else {
-                for student in result as! [AnyObject] {
-                    let pin = MKPointAnnotation()
-                    let latitude = student["latitude"] as! Double
-                    let longitude = student["longitude"] as! Double
-                    pin.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
-                    pin.title = String(stringInterpolationSegment:student["firstName"]) + " " + String(stringInterpolationSegment: student["lastName"])
-                    self.mapView.addAnnotation(pin)
+                for studentJson in result as! [AnyObject] {
                     
+                    let student = Student(studentJson: studentJson)
+                    
+                    let pin = MKPointAnnotation()
+                    pin.coordinate = CLLocationCoordinate2DMake(student.getLatitude(), student.getLongitude())
+                    pin.title = student.getFullName()
+                    pin.subtitle = student.getMediaUrl()
+                    self.mapView.addAnnotation(pin)
                 }
             }
         }

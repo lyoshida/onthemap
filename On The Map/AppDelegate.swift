@@ -58,3 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // Demo
 // https://www.udacity.com/course/viewer#!/c-ud421-nd/l-3675848693/m-3943728695
+
+// Mapkit reference
+// http://stackoverflow.com/questions/27349612/how-do-i-add-pins-annotations-with-xcode-6-swift
