@@ -105,7 +105,7 @@ extension OTMClient {
                     if let result = result as? NSDictionary {
                         if let studentList = result["results"] as? [AnyObject] {
                             self.studentList = studentList as? [AnyObject]
-                            completionHandler(result: result, errorString: nil)
+                            completionHandler(result: self.studentList, errorString: nil)
                         }
                     }
                 }
