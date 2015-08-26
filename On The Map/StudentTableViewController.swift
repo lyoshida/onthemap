@@ -12,25 +12,17 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var studentTable: UITableView!
     
-    var studentList: [AnyObject]? = nil
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         studentTable.dataSource = self
         studentTable.delegate = self
         
-        self.loadStudents { result, error in
-            if let result = result {
-                self.studentList = result as! [AnyObject]
-                self.studentTable.reloadData()
-            }
-        }
-        
+        self.loadStudents(false)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let studentList = self.studentList {
-            return self.studentList!.count
+        if let studentList = OTMClient.sharedInstance().studentList {
+            return studentList.count
         } else {
             return 0
         }
@@ -39,7 +31,7 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("StudentTableCell", forIndexPath: indexPath) as! UITableViewCell
         
-        if let studentList = self.studentList as [AnyObject]? {
+        if let studentList = OTMClient.sharedInstance().studentList as [AnyObject]? {
             let dict: NSDictionary = studentList[indexPath.row] as! NSDictionary
             let firstName = dict["firstName"] as! String
             let lastName = dict["lastName"] as! String
@@ -53,20 +45,25 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
-    func loadStudents(completionHandler: (results: AnyObject?, error: NSError?) -> Void) {
-        OTMClient.sharedInstance().getStudents() { result, error in
+    func loadStudents(forceReload: Bool) {
+        OTMClient.sharedInstance().getStudents(forceReload) { result, error in
             if let error = error {
+                
                 var alert = UIAlertView(title: "Error", message: "Error retrieving student data.", delegate: self, cancelButtonTitle: "OK")
                 alert.show()
+                
             } else {
-                if let result = result as? NSDictionary {
-                    if let studentList = result["results"] as? [AnyObject] {
-                        completionHandler(results: studentList, error: nil)
-                    } else {
-                        completionHandler(results: nil, error: error)
-                    }
-                }
+                    
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.studentTable.reloadData()
+                })
+                
             }
         }
     }
+    
+    @IBAction func reloadList(sender: UIBarButtonItem) {
+        self.loadStudents(true)
+    }
+    
 }

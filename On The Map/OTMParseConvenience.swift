@@ -10,25 +10,6 @@ import Foundation
 
 extension OTMClient {
     
-    func getStudents(completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
-        
-        let url: String = "\(OTMClient.Constants.parseApiUrl)"
-        let headerParams: [String: String] = [
-            "X-Parse-Application-Id": OTMClient.Constants.parseApplicationId,
-            "X-Parse-REST-API-Key": OTMClient.Constants.parseApiKey
-        ]
-        
-        let task = taskForParseGETMethod(url, parameters:nil) { result, error in
-            
-            if let error = error {
-                completionHandler(result: result, errorString: error)
-            } else {
-                completionHandler(result: result, errorString: nil)
-            }
-            
-        }
-        
-    }
     
     func taskForParseGETMethod(url: String, parameters: [String: AnyObject]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
@@ -100,6 +81,41 @@ extension OTMClient {
         return task
         
     }
+    
+    // Retrives the list of students, saves it to the self.studentList variable and return the result to the completionHandler.
+    func getStudents(forceReload: Bool, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
+        
+        // If a studentList already exists return it. If self.studentList is nil or forceReload is true, retrieve the list of students.
+        if forceReload == false && self.studentList != nil {
+            completionHandler(result: self.studentList, errorString: nil)
+            return
+        } else {
+            
+            let url: String = "\(OTMClient.Constants.parseApiUrl)"
+            let headerParams: [String: String] = [
+                "X-Parse-Application-Id": OTMClient.Constants.parseApplicationId,
+                "X-Parse-REST-API-Key": OTMClient.Constants.parseApiKey
+            ]
+            
+            let task = taskForParseGETMethod(url, parameters:nil) { result, error in
+                
+                if let error = error {
+                    completionHandler(result: result, errorString: error)
+                } else {
+                    if let result = result as? NSDictionary {
+                        if let studentList = result["results"] as? [AnyObject] {
+                            self.studentList = studentList as? [AnyObject]
+                            completionHandler(result: result, errorString: nil)
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        
+    }
+
 
     
 }

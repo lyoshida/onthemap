@@ -14,6 +14,8 @@ class OTMClient : NSObject {
     
     var sessionId: String? = nil
     
+    var studentList: [AnyObject]? = nil
+    
     override init() {
         
         session = NSURLSession.sharedSession()

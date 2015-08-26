@@ -125,7 +125,11 @@
                                 <items>
                                     <navigationItem title="On The Map" id="g2b-Oc-qpw">
                                         <barButtonItem key="leftBarButtonItem" image="pin" id="SCL-zO-mBf"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="xIz-ar-cgb"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="xIz-ar-cgb">
+                                            <connections>
+                                                <action selector="reloadList:" destination="e4u-V5-hjZ" id="z1j-S0-L1l"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
