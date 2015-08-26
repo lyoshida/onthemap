@@ -39,7 +39,7 @@ class OTMClient : NSObject {
             if let error = downloadError {
                 completionHandler(result: nil, error: downloadError)
             } else {
-                OTMClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+                OTMClient.parseJSONWithCompletionHandler(data, removeStart: true, completionHandler: completionHandler)
             }
         }
         
@@ -82,7 +82,7 @@ class OTMClient : NSObject {
             if let error = downloadError {
                 completionHandler(result: nil, error: downloadError)
             } else {
-                OTMClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+                OTMClient.parseJSONWithCompletionHandler(data, removeStart: true, completionHandler: completionHandler)
             }
         }
         
@@ -115,11 +115,13 @@ class OTMClient : NSObject {
     }
     
     /* Helper: Given raw JSON, return a usable Foundation object */
-    class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+    class func parseJSONWithCompletionHandler(data: NSData, removeStart: Bool, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
         var parsingError: NSError? = nil
-        
-        let newData = data.subdataWithRange(NSMakeRange(5, data.length-5))
+        var newData = data
+        if removeStart {
+            newData = data.subdataWithRange(NSMakeRange(5, data.length-5))
+        }
         
         let parsedResult: AnyObject? = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
         
@@ -129,7 +131,6 @@ class OTMClient : NSObject {
             completionHandler(result: parsedResult, error: nil)
         }
     }
-    
     
     class func sharedInstance() -> OTMClient {
         

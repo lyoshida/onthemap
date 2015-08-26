@@ -34,26 +34,4 @@ extension OTMClient {
         }
     }
     
-    
-    func getStudents(completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
-        
-        let url: String = "\(OTMClient.Constants.parseApiUrl)"
-        let headerParams: [String: String] = [
-            "X-Parse-Application-Id": OTMClient.Constants.parseApplicationId,
-            "X-Parse-REST-API-Key": OTMClient.Constants.parseApiKey
-        ]
-        
-        let task = taskForGETMethod(url, parameters:nil, headerParams: headerParams) { result, error in
-            
-            if let error = error {
-                completionHandler(result: result, errorString: error)
-            } else {
-                completionHandler(result: result, errorString: nil)
-            }
-            
-        }
-        
-        
-    }
-    
 }

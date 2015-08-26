@@ -134,12 +134,23 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="rfS-E2-RWd">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentTableCell" id="rfS-E2-RWd">
                                         <rect key="frame" x="0.0" y="0.0" width="611" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rfS-E2-RWd" id="z3Z-4x-PBG">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ghb-pp-d2d">
+                                                    <rect key="frame" x="34" y="0.0" width="43" height="43"/>
+                                                    <animations/>
+                                                </imageView>
+                                            </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ghb-pp-d2d" secondAttribute="bottom" constant="-8" id="O5T-dE-ilk"/>
+                                                <constraint firstItem="ghb-pp-d2d" firstAttribute="top" secondItem="z3Z-4x-PBG" secondAttribute="topMargin" constant="-8" id="Odh-zI-Uth"/>
+                                                <constraint firstItem="ghb-pp-d2d" firstAttribute="leading" secondItem="z3Z-4x-PBG" secondAttribute="leadingMargin" constant="26" id="wRz-zB-4Ba"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>

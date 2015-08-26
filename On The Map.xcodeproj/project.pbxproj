@@ -24,6 +24,7 @@
 		E9C966401B8BD85300BFA6FA /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99FA4331B8A3FA300B6A720 /* Roboto-Medium.ttf */; };
 		E9C966411B8BD85300BFA6FA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99FA4341B8A3FA300B6A720 /* Roboto-Regular.ttf */; };
 		E9C966421B8BD85300BFA6FA /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99FA4351B8A3FA300B6A720 /* Roboto-Thin.ttf */; };
+		E9C966441B8D3DA600BFA6FA /* OTMParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C966431B8D3DA600BFA6FA /* OTMParseConvenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
 		E9C9663A1B8BA43B00BFA6FA /* OTMConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConvenience.swift; sourceTree = "<group>"; };
 		E9C9663E1B8BD5A900BFA6FA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E9C966431B8D3DA600BFA6FA /* OTMParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMParseConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				E9C966361B8A9B7B00BFA6FA /* OTMClient.swift */,
 				E9C966381B8A9BC400BFA6FA /* OTMConstants.swift */,
 				E9C9663A1B8BA43B00BFA6FA /* OTMConvenience.swift */,
+				E9C966431B8D3DA600BFA6FA /* OTMParseConvenience.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				E9C966351B8A530C00BFA6FA /* PaddingTextField.swift in Sources */,
 				E9C966371B8A9B7B00BFA6FA /* OTMClient.swift in Sources */,
 				E972A5E81B895D50006A1054 /* AppDelegate.swift in Sources */,
+				E9C966441B8D3DA600BFA6FA /* OTMParseConvenience.swift in Sources */,
 				E99FA4311B8A3E0B00B6A720 /* LoginViewController.swift in Sources */,
 				E9C9663B1B8BA43B00BFA6FA /* OTMConvenience.swift in Sources */,
 				E986AFAC1B8CDC1800709E1D /* MapViewController.swift in Sources */,

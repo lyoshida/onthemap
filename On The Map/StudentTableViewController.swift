@@ -12,30 +12,61 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var studentTable: UITableView!
     
+    var studentList: [AnyObject]? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         studentTable.dataSource = self
         studentTable.delegate = self
         
-        loadStudents()
+        self.loadStudents { result, error in
+            if let result = result {
+                self.studentList = result as! [AnyObject]
+                self.studentTable.reloadData()
+            }
+        }
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        if let studentList = self.studentList {
+            return self.studentList!.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("StudentTableCell", forIndexPath: indexPath) as! UITableViewCell
+        
+        if let studentList = self.studentList as [AnyObject]? {
+            let dict: NSDictionary = studentList[indexPath.row] as! NSDictionary
+            let firstName = dict["firstName"] as! String
+            let lastName = dict["lastName"] as! String
+            cell.textLabel!.text = "\(firstName) \(lastName)"
+            
+            let image: UIImage = UIImage(named: "pin")!
+            cell.imageView!.image = image
+        }
+        
+        return cell
+        
     }
     
-    func loadStudents() {
+    func loadStudents(completionHandler: (results: AnyObject?, error: NSError?) -> Void) {
         OTMClient.sharedInstance().getStudents() { result, error in
             if let error = error {
-                println(error)
+                var alert = UIAlertView(title: "Error", message: "Error retrieving student data.", delegate: self, cancelButtonTitle: "OK")
+                alert.show()
             } else {
-                println(result)
+                if let result = result as? NSDictionary {
+                    if let studentList = result["results"] as? [AnyObject] {
+                        completionHandler(results: studentList, error: nil)
+                    } else {
+                        completionHandler(results: nil, error: error)
+                    }
+                }
             }
-            
         }
     }
 }
