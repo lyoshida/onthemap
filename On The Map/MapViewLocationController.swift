@@ -8,11 +8,14 @@
 // http://sweettutos.com/2015/04/24/swift-mapkit-tutorial-series-how-to-search-a-place-address-or-poi-in-the-map/
 
 import UIKit
+import MapKit
 
 class MapViewLocationController: UIViewController {
 
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
+    @IBOutlet weak var confirmView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +23,8 @@ class MapViewLocationController: UIViewController {
         // Sets the placeholder color to white
         if let locationTextField = locationTextField {
             locationTextField.attributedPlaceholder = NSAttributedString(string:"Enter your location here", attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
-            
         }
+        self.confirmView.hidden = true
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="15A262e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="38R-cu-fZ7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="38R-cu-fZ7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -261,6 +261,23 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fmq-su-knT">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KNU-5B-QpE">
+                                        <rect key="frame" x="0.0" y="146" width="600" height="341"/>
+                                        <animations/>
+                                    </mapView>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" red="0.1019607843" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KNU-5B-QpE" secondAttribute="trailing" id="oKn-xz-O5b"/>
+                                    <constraint firstItem="KNU-5B-QpE" firstAttribute="leading" secondItem="Fmq-su-knT" secondAttribute="leading" id="tWe-YH-YwW"/>
+                                    <constraint firstItem="KNU-5B-QpE" firstAttribute="top" secondItem="Fmq-su-knT" secondAttribute="top" constant="146" id="xVu-cn-c7T"/>
+                                    <constraint firstAttribute="bottom" secondItem="KNU-5B-QpE" secondAttribute="bottom" id="xiG-HF-jBN"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -272,7 +289,11 @@
                             <constraint firstAttribute="trailing" secondItem="PDc-BZ-I2A" secondAttribute="trailing" id="Go3-cX-YKO"/>
                             <constraint firstAttribute="centerX" secondItem="a33-UG-2Tq" secondAttribute="centerX" id="Htd-85-tCZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Yx4-hH-rvn" secondAttribute="trailing" constant="-16" id="RLf-2L-2Wy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fmq-su-knT" secondAttribute="trailing" constant="-16" id="abj-x9-31T"/>
+                            <constraint firstItem="Ktc-dZ-anc" firstAttribute="top" secondItem="Fmq-su-knT" secondAttribute="bottom" id="d3H-NY-WfY"/>
                             <constraint firstItem="Yx4-hH-rvn" firstAttribute="leading" secondItem="IuZ-KA-U53" secondAttribute="leadingMargin" constant="-16" id="ecy-ZR-JaI"/>
+                            <constraint firstItem="Fmq-su-knT" firstAttribute="leading" secondItem="IuZ-KA-U53" secondAttribute="leadingMargin" constant="-16" id="izA-Vf-bCh"/>
+                            <constraint firstItem="Fmq-su-knT" firstAttribute="top" secondItem="PDc-BZ-I2A" secondAttribute="bottom" id="lCE-pV-tK7"/>
                             <constraint firstAttribute="centerX" secondItem="3H0-E0-Fkd" secondAttribute="centerX" id="mLR-et-KpA"/>
                             <constraint firstItem="jbo-yz-Bba" firstAttribute="top" secondItem="a33-UG-2Tq" secondAttribute="bottom" constant="10" id="nLi-1A-ufC"/>
                             <constraint firstItem="3H0-E0-Fkd" firstAttribute="top" secondItem="jbo-yz-Bba" secondAttribute="bottom" constant="10" id="pkg-AC-XXe"/>
@@ -281,8 +302,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="confirmView" destination="Fmq-su-knT" id="z65-NZ-Q8y"/>
                         <outlet property="findLocationButton" destination="vwm-Bi-swI" id="PWT-uw-OW3"/>
                         <outlet property="locationTextField" destination="7EV-to-pya" id="ftw-7J-GAf"/>
+                        <outlet property="mapView" destination="KNU-5B-QpE" id="62E-jM-ws7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6pa-D6-sFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
