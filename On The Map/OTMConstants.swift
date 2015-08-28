@@ -16,12 +16,17 @@ extension OTMClient {
         static let parseApiUrl: String = "https://api.parse.com/1/classes/StudentLocation"
         static let parseApplicationId: String = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let parseApiKey: String = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        static let headerParams: [String:String] = [
+            "X-Parse-Application-Id": OTMClient.Constants.parseApplicationId,
+            "X-Parse-REST-API-Key": OTMClient.Constants.parseApiKey
+        ]
         
     }
     
     struct Methods {
         
         static let authUrl: String = "session"
+        static let userDataUrl: String = "user/"
     }
     
     

@@ -13,6 +13,9 @@ class OTMClient : NSObject {
     var session: NSURLSession
     
     var sessionId: String? = nil
+    var userId: String? = nil
+    var userFirstName: String? = nil
+    var userLastName: String? = nil
     
     var studentList: [AnyObject]? = nil
     
@@ -22,10 +25,16 @@ class OTMClient : NSObject {
         super.init()
     }
     
-    func taskForGETMethod(url: String, parameters: [String: AnyObject], headerParams: [String: String]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForGETMethod(url: String, parameters: [String: AnyObject]?, headerParams: [String: String]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
+        var urlString : String
         // Build the URL
-        let urlString = "\(url)\(OTMClient.escapedParameters(parameters))"
+        if let params = parameters {
+            urlString = "\(url)\(OTMClient.escapedParameters(params))"
+        } else {
+            urlString = "\(url)"
+        }
+        
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         

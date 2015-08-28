@@ -92,11 +92,7 @@ extension OTMClient {
         } else {
             
             let url: String = "\(OTMClient.Constants.parseApiUrl)"
-            let headerParams: [String: String] = [
-                "X-Parse-Application-Id": OTMClient.Constants.parseApplicationId,
-                "X-Parse-REST-API-Key": OTMClient.Constants.parseApiKey
-            ]
-            
+            let headerParams: [String: String] = OTMClient.Constants.headerParams
             let task = taskForParseGETMethod(url, parameters:nil) { result, error in
                 
                 if let error = error {
@@ -116,6 +112,30 @@ extension OTMClient {
         
     }
 
-
+    func postUserLocation(location: String, link: String, latitude: String, longitude: String, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
+        
+        let url: String = "\(OTMClient.Constants.parseApiUrl)"
+        let headerParams: [String: String] = OTMClient.Constants.headerParams
+        
+        let jsonBody: [String: AnyObject] = [
+            "latitude": latitude,
+            "longitude": longitude,
+            "uniqueKey": self.userId!,
+            "firstName": self.userFirstName!,
+            "lastName": self.userLastName!,
+            "mapString": location,
+            "mediaUrl": link
+        ]
+        
+        let task = taskForParsePOSTMethod(url, parameters: nil, jsonBody: jsonBody) { result, error in
+            
+            if let error = error {
+                completionHandler(result: nil, errorString: error)
+            } else {
+                completionHandler(result: result, errorString: error)
+            }
+            
+        }
+    }
     
 }

@@ -13,8 +13,10 @@ import MapKit
 class MapViewLocationController: UIViewController {
 
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
     
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var locationSelectView: UIView!
     @IBOutlet weak var confirmView: UIView!
     @IBOutlet weak var mapView: MKMapView!
@@ -33,6 +35,10 @@ class MapViewLocationController: UIViewController {
         // Sets the placeholder color to white
         if let locationTextField = locationTextField {
             locationTextField.attributedPlaceholder = NSAttributedString(string:"Enter your location here", attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        }
+        
+        if let linkTextField = linkTextField {
+            linkTextField.attributedPlaceholder = NSAttributedString(string:"Share your link here", attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         }
         self.confirmView.hidden = true
     }

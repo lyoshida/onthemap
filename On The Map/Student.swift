@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Student {
+struct Student {
     
     var student: [String: AnyObject]
     

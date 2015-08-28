@@ -10,6 +10,8 @@ import Foundation
 
 extension OTMClient {
     
+    
+    // Performs login via Udacity's API and saves the sessionId and UserId
     func login(username: String, password: String, completionHandler: (success: Bool, statusCode: String?, errorString: String?) -> Void) {
         let url: String = "\(OTMClient.Constants.baseUrl)\(OTMClient.Methods.authUrl)"
         let json: [String: [String: String]] = [
@@ -27,10 +29,42 @@ extension OTMClient {
                 if let session = result.valueForKey("session") as? NSDictionary {
                     if let sessionId = session.valueForKey("id") as? String {
                         self.sessionId = sessionId
-                        completionHandler(success: true, statusCode: nil, errorString: nil)
                     }
                 }
+                if let account = result.valueForKey("account") as? NSDictionary {
+                    if let userId = account.valueForKey("key") as? String {
+                        self.userId = userId
+                    }
+                }
+                
+                completionHandler(success: true, statusCode: nil, errorString: nil)
             }
+        }
+    }
+    
+    func getUserDetails(completionHandler: (success: Bool, statusCode: String?, errorString: String?) -> Void) {
+        
+        var userId: String = ""
+        if let id = self.userId {
+            userId = id
+        }
+        
+        let url: String = "\(OTMClient.Constants.baseUrl)\(OTMClient.Methods.userDataUrl)\(userId)"
+        
+        let task = taskForGETMethod(url, parameters: nil, headerParams: nil) { result, error in
+            if let error = error {
+                completionHandler(success: false, statusCode: nil, errorString: "Error retrieving user details.")
+            } else {
+                if let firstName = result.valueForKey("first_name") as? String{
+                    self.userFirstName = firstName
+                }
+                if let lastName = result.valueForKey("last_name") as? String {
+                    self.userLastName = lastName
+                }
+                
+                completionHandler(success: true, statusCode: nil, errorString: nil)
+            }
+            
         }
     }
     
