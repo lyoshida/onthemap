@@ -14,8 +14,18 @@ class MapViewLocationController: UIViewController {
 
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
+    
+    @IBOutlet weak var locationSelectView: UIView!
     @IBOutlet weak var confirmView: UIView!
     @IBOutlet weak var mapView: MKMapView!
+    
+    var annotation: MKAnnotation!
+    var localSearchRequest: MKLocalSearchRequest!
+    var localSearch: MKLocalSearch!
+    var localSearchResponse: MKLocalSearchResponse!
+    var error: NSError!
+    var pointAnnotation: MKPointAnnotation!
+    var pinAnnotationView: MKPinAnnotationView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +45,33 @@ class MapViewLocationController: UIViewController {
     @IBAction func findLocation(sender: UIButton) {
         
         if locationTextField.text != "" {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapView") as! MapViewController
-            controller.locationString = locationTextField.text
-            self.presentViewController(controller, animated: true, completion: nil)
+            
+            locationSelectView.hidden = true
+            confirmView.hidden = false
+            localSearchRequest = MKLocalSearchRequest()
+            localSearchRequest.naturalLanguageQuery = self.locationTextField.text
+            localSearch = MKLocalSearch(request: localSearchRequest)
+            localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
+                
+                if localSearchResponse == nil {
+                    var alert = UIAlertView(title: nil, message: "Place not found", delegate: self, cancelButtonTitle: "try again?")
+                    alert.show()
+                    return
+                }
+                
+                self.pointAnnotation = MKPointAnnotation()
+                self.pointAnnotation.title = self.locationTextField.text
+                self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse.boundingRegion.center.latitude, longitude:     localSearchResponse.boundingRegion.center.longitude)
+                
+                self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
+                self.mapView.centerCoordinate = self.pointAnnotation.coordinate
+                self.mapView.addAnnotation(self.pinAnnotationView.annotation)
+                
+                
+                
+            }
+
+        
         }
     }
     
