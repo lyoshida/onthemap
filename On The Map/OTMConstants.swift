@@ -26,7 +26,7 @@ extension OTMClient {
     struct Methods {
         
         static let authUrl: String = "session"
-        static let userDataUrl: String = "user/"
+        static let userDataUrl: String = "users/"
     }
     
     

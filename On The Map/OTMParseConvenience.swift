@@ -152,10 +152,13 @@ extension OTMClient {
         
     }
 
-    func postUserLocation(location: String, link: String, latitude: String, longitude: String, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
+    func postUserLocation(location: String, link: String, latitude: Double, longitude: Double, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
         
         let url: String = "\(OTMClient.Constants.parseApiUrl)"
         let headerParams: [String: String] = OTMClient.Constants.headerParams
+        
+        println("firstName: \(self.userFirstName)")
+        println("lastName: \(self.userLastName)")
         
         let jsonBody: [String: AnyObject] = [
             "latitude": latitude,
@@ -164,11 +167,11 @@ extension OTMClient {
             "firstName": self.userFirstName!,
             "lastName": self.userLastName!,
             "mapString": location,
-            "mediaUrl": link
+            "mediaURL": link
         ]
         
         let task = taskForParsePOSTMethod(url, parameters: nil, jsonBody: jsonBody) { result, error in
-            
+            println(result)
             if let error = error {
                 completionHandler(result: nil, errorString: error)
             } else {

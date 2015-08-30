@@ -50,18 +50,18 @@ extension OTMClient {
         }
         
         let url: String = "\(OTMClient.Constants.baseUrl)\(OTMClient.Methods.userDataUrl)\(userId)"
-        
+
         let task = taskForGETMethod(url, parameters: nil, headerParams: nil) { result, error in
             if let error = error {
                 completionHandler(success: false, statusCode: nil, errorString: "Error retrieving user details.")
+                return
             } else {
-                if let firstName = result.valueForKey("first_name") as? String{
+                if let firstName = result.valueForKey("user")!.valueForKey("first_name") as? String {
                     self.userFirstName = firstName
                 }
-                if let lastName = result.valueForKey("last_name") as? String {
+                if let lastName = result.valueForKey("user")!.valueForKey("last_name") as? String {
                     self.userLastName = lastName
                 }
-                
                 completionHandler(success: true, statusCode: nil, errorString: nil)
             }
             

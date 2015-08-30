@@ -49,6 +49,7 @@ class LoginViewController : UIViewController {
                     }
                 } else {
                     // Get User details
+                    
                     OTMClient.sharedInstance().getUserDetails({success, statusCode, errorString in
                         if success == true {
                             self.completeLogin()

@@ -29,6 +29,10 @@ class MapViewLocationController: UIViewController {
     var pointAnnotation: MKPointAnnotation!
     var pinAnnotationView: MKPinAnnotationView!
     
+    var latitude: Double? = nil
+    var longitude: Double? = nil
+    var localName: String? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,26 +66,46 @@ class MapViewLocationController: UIViewController {
                 if localSearchResponse == nil {
                     var alert = UIAlertView(title: nil, message: "Place not found", delegate: self, cancelButtonTitle: "try again?")
                     alert.show()
+                    self.locationSelectView.hidden = false
+                    self.confirmView.hidden = true
                     return
                 }
+
+                self.latitude = localSearchResponse.boundingRegion.center.latitude as Double
+                self.longitude = localSearchResponse.boundingRegion.center.longitude as Double
+                self.localName = localSearchResponse.mapItems[0].name
                 
                 self.pointAnnotation = MKPointAnnotation()
-                self.pointAnnotation.title = self.locationTextField.text
-                self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse.boundingRegion.center.latitude, longitude:     localSearchResponse.boundingRegion.center.longitude)
+                self.pointAnnotation.title = self.localName
+                self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
                 
                 self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
                 self.mapView.centerCoordinate = self.pointAnnotation.coordinate
                 self.mapView.addAnnotation(self.pinAnnotationView.annotation)
                 
-                
-                
             }
 
-        
         }
     }
     
+    @IBAction func submitLocation(sender: UIButton) {
+        
+        // TODO: Check if url is empty
+        
+        OTMClient.sharedInstance().postUserLocation(self.localName!, link: self.linkTextField.text!, latitude: self.latitude!, longitude: self.longitude!) { result, error in
+            
+            if let error = error {
+                var alert = UIAlertView(title: nil, message: "Could not post location.", delegate: self, cancelButtonTitle: "try again?")
+                alert.show()
+            } else {
+                println("success")
+            }
+            
+        }
+        
+        
+        
+    }
     
-
 }
 
