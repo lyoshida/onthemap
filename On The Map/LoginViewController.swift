@@ -53,6 +53,7 @@ class LoginViewController : UIViewController {
                     OTMClient.sharedInstance().getUserDetails({success, statusCode, errorString in
                         if success == true {
                             self.completeLogin()
+                            println(OTMClient.sharedInstance().userId)
                         } else {
                         var alert = UIAlertView(title: nil, message: errorString, delegate: self, cancelButtonTitle: "OK")
                         alert.show()

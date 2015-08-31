@@ -98,7 +98,9 @@ class MapViewLocationController: UIViewController {
                 var alert = UIAlertView(title: nil, message: "Could not post location.", delegate: self, cancelButtonTitle: "try again?")
                 alert.show()
             } else {
-                println("success")
+                if let objId = result?.valueForKey("objectId") as? String {
+                    OTMClient.sharedInstance().objectId = objId
+                }
             }
             
         }

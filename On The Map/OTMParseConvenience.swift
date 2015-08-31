@@ -151,14 +151,35 @@ extension OTMClient {
         }
         
     }
+    
+    func getUserObjectId(completionHandler: (result: AnyObject?, error: NSError?) -> Void) {
+        
+        let url: String = "https://api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(self.userId)%22%7D"
+        
+        let task = taskForParseGETMethod(url, parameters: nil) { result, error in
+            
+            if let error = error {
+                completionHandler(result: nil, error: error)
+            } else {
+                if let studentJson = result.valueForKey("result")![0] {
+                    if let objId = studentJson.valueForKey("ObjectId") {
+                        self.objectId = objId
+                        completionHandler(result: objId, error: nil)
+                    } else {
+                        completionHandler(result: nil, error: nil)
+                    }
+                }
+            }
+            
+        }
+        
+        
+    }
 
     func postUserLocation(location: String, link: String, latitude: Double, longitude: Double, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
         
         let url: String = "\(OTMClient.Constants.parseApiUrl)"
         let headerParams: [String: String] = OTMClient.Constants.headerParams
-        
-        println("firstName: \(self.userFirstName)")
-        println("lastName: \(self.userLastName)")
         
         let jsonBody: [String: AnyObject] = [
             "latitude": latitude,
@@ -171,7 +192,6 @@ extension OTMClient {
         ]
         
         let task = taskForParsePOSTMethod(url, parameters: nil, jsonBody: jsonBody) { result, error in
-            println(result)
             if let error = error {
                 completionHandler(result: nil, errorString: error)
             } else {

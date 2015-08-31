@@ -16,6 +16,7 @@ class OTMClient : NSObject {
     var userId: String? = nil
     var userFirstName: String? = nil
     var userLastName: String? = nil
+    var objectId: String? = nil
     
     var studentList: [AnyObject]? = nil
     
