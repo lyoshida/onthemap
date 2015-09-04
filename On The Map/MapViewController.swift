@@ -24,17 +24,61 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin") as? MKPinAnnotationView
-        
-        if (annotationView == nil) {
-            return nil
-        } else {
-            annotationView!.annotation = annotation
+        if control == view.rightCalloutAccessoryView {
+            
+            if let urlString = view.annotation.subtitle {
+                print(urlString)
+                if let url = NSURL(string: urlString) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+                
+            }
+            
         }
         
-        return annotationView
+    }
+    
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        if let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin") as MKPinAnnotationView? {
+            annotationView.annotation = annotation
+            annotationView.canShowCallout = true
+            annotationView.animatesDrop = true
+            
+            let linkButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+            linkButton.frame.size.width = 44
+            linkButton.frame.size.height = 44
+            linkButton.setImage(UIImage(named: "pin"), forState: .Normal)
+            
+            annotationView.rightCalloutAccessoryView = linkButton
+            return annotationView
+        } else {
+            
+            return nil
+        }
+//        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin") as? MKPinAnnotationView
+//        
+//        if (annotationView == nil) {
+//            return nil
+//        } else {
+//            annotationView!.annotation = annotation
+//            annotationView!.canShowCallout = true
+//            annotationView!.animatesDrop = true
+//            
+//            let linkButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+//            linkButton.frame.size.width = 44
+//            linkButton.frame.size.height = 44
+//            linkButton.backgroundColor = UIColor.blueColor()
+//            linkButton.setImage(UIImage(named: "View link"), forState: .Normal)
+//            
+//            annotationView?.rightCalloutAccessoryView = linkButton
+//            
+//        }
+//        
+//        return annotationView
     }
     
     func addPins(forceReload: Bool) {
@@ -55,6 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     pin.coordinate = CLLocationCoordinate2DMake(student.getLatitude(), student.getLongitude())
                     pin.title = student.getFullName()
                     pin.subtitle = student.getMediaUrl()
+                    
                     dispatch_async(dispatch_get_main_queue(), {
                         self.mapView.addAnnotation(pin)
                     })

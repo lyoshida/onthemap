@@ -59,13 +59,15 @@ class LoginViewController : UIViewController {
                     
                     OTMClient.sharedInstance().getUserDetails({success, statusCode, errorString in
                         if success == true {
+                            
                             self.completeLogin()
-                            println(OTMClient.sharedInstance().userId)
+                            
                         } else {
                             
                             self.showErrorAlert("Error", message: "Failed to retrieve user details.", cancelButtonTitle: "Dismiss")
                             
                         }
+                        
                     })
                     
                 }

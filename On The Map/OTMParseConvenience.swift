@@ -235,7 +235,7 @@ extension OTMClient {
             "firstName": self.userFirstName!,
             "lastName": self.userLastName!,
             "mapString": location,
-            "mediaUrl": link
+            "mediaURL": link
         ]
         
         let task = taskForParsePUTMethod(url, parameters: nil, jsonBody: jsonBody) { result, error in
