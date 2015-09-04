@@ -12,7 +12,7 @@ extension OTMClient {
     
     
     // Performs login via Udacity's API and saves the sessionId and UserId
-    func login(username: String, password: String, completionHandler: (success: Bool, statusCode: String?, errorString: String?) -> Void) {
+    func login(username: String, password: String, completionHandler: (success: Bool, error: NSError?) -> Void) {
         let url: String = "\(OTMClient.Constants.baseUrl)\(OTMClient.Methods.authUrl)"
         let json: [String: [String: String]] = [
             "udacity": [
@@ -23,8 +23,10 @@ extension OTMClient {
         
         let task = taskForPOSTMethod(url, parameters: nil, headerParams: nil, jsonBody: json) { result, error in
             
-            if let error = result.valueForKey("error") as? String {
-                completionHandler(success: false, statusCode: result.valueForKey("status") as? String, errorString: error)
+            if let error = error  {
+                
+                completionHandler(success: false, error: error)
+                
             } else {
                 if let session = result.valueForKey("session") as? NSDictionary {
                     if let sessionId = session.valueForKey("id") as? String {
@@ -37,7 +39,7 @@ extension OTMClient {
                     }
                 }
                 
-                completionHandler(success: true, statusCode: nil, errorString: nil)
+                completionHandler(success: true, error: nil)
             }
         }
     }

@@ -38,15 +38,22 @@ class LoginViewController : UIViewController {
     }
 
     @IBAction func loginRequest(sender: UIButton) {
+        
         if usernameTextField.text == "" || passwordTextField.text == "" {
+            
             statusLabel.text = "Please fill your username and password."
+            
         } else {
-            OTMClient.sharedInstance().login(usernameTextField.text, password: passwordTextField.text, completionHandler: { success, statusCode, errorString in
+            
+            OTMClient.sharedInstance().login(usernameTextField.text, password: passwordTextField.text, completionHandler: { success, error in
                 
                 if success == false {
-                    if let error = errorString {
-                        self.displayMessage(error)
+                    
+                    if let error = error {
+                        
+                        self.showErrorAlert("Error", message: error.localizedDescription, cancelButtonTitle: "Dismiss")
                     }
+                    
                 } else {
                     // Get User details
                     
@@ -55,8 +62,9 @@ class LoginViewController : UIViewController {
                             self.completeLogin()
                             println(OTMClient.sharedInstance().userId)
                         } else {
-                        var alert = UIAlertView(title: nil, message: errorString, delegate: self, cancelButtonTitle: "OK")
-                        alert.show()
+                            
+                            self.showErrorAlert("Error", message: "Failed to retrieve user details.", cancelButtonTitle: "Dismiss")
+                            
                         }
                     })
                     
@@ -79,5 +87,21 @@ class LoginViewController : UIViewController {
     
     func displayMessage(message: String) {
         statusLabel.text = message
+    }
+    
+    func showErrorAlert(title: String?, message: String, cancelButtonTitle: String) -> Void {
+        
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) in
+            
+            // Do nothing
+            
+        }))
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.presentViewController(alert, animated: true, completion: nil)
+        })
+        
     }
 }
