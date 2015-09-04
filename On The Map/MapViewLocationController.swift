@@ -90,22 +90,59 @@ class MapViewLocationController: UIViewController {
     
     @IBAction func submitLocation(sender: UIButton) {
         
-        // TODO: Check if url is empty
-        
-        OTMClient.sharedInstance().postUserLocation(self.localName!, link: self.linkTextField.text!, latitude: self.latitude!, longitude: self.longitude!) { result, error in
+        if let objId =  OTMClient.sharedInstance().objectId {
             
-            if let error = error {
-                var alert = UIAlertView(title: nil, message: "Could not post location.", delegate: self, cancelButtonTitle: "try again?")
-                alert.show()
-            } else {
-                if let objId = result?.valueForKey("objectId") as? String {
-                    OTMClient.sharedInstance().objectId = objId
+            OTMClient.sharedInstance().putUserLocation(objId, location: self.localName!, link: self.linkTextField.text!, latitude: self.latitude!, longitude: self.longitude!) { result, error in
+                
+                if let error = error {
+                    
+                    self.showErrorAlert("Error", message: "Could not update location", cancelButtonTitle: "Dismiss")
+                    
+                } else {
+                    
+                    let mapViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MapView") as! UIViewController
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.presentViewController(mapViewController, animated: true, completion: nil)
+                    })
+                    
                 }
+                
+            }
+            
+        } else {
+            
+            OTMClient.sharedInstance().postUserLocation(self.localName!, link: self.linkTextField.text!, latitude: self.latitude!, longitude: self.longitude!) { result, error in
+                
+                if let error = error {
+                    
+                    self.showErrorAlert("Error" , message: "Could not post location.", cancelButtonTitle: "try again?")
+                    
+                } else {
+                    
+                    let mapViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MapView") as! UIViewController
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.presentViewController(mapViewController, animated: true, completion: nil)
+                    })
+                    
+                }
+                
             }
             
         }
+    }
+    
+    
+    func showErrorAlert(title: String?, message: String, cancelButtonTitle: String) -> Void {
         
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) in
+            
+            // Do nothing
+            
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     

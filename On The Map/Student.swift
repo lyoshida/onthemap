@@ -61,8 +61,8 @@ struct Student {
         return longitude
     }
     
-    func getObjectId() -> String {
-        var objectId: String
+    func getObjectId() -> String? {
+        var objectId: String? = nil
         if let objId = self.student["objectId"] as? String {
             objectId = objId
         }

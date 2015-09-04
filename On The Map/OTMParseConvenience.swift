@@ -152,27 +152,49 @@ extension OTMClient {
         
     }
     
-    func getUserObjectId(completionHandler: (result: AnyObject?, error: NSError?) -> Void) {
+    /**
+        Checks if the user has posted a location and returns its ObjectId.
+    
+        :params completionHandler The callback function
         
-        let url: String = "https://api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(self.userId)%22%7D"
+        :returns void
+    */
+    func getLoggedUserObjectId(completionHandler: (result: String?, error: NSError?) -> Void) {
+        
+        let url: String = "https://api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(self.userId!)%22%7D"
         
         let task = taskForParseGETMethod(url, parameters: nil) { result, error in
             
             if let error = error {
+                
                 completionHandler(result: nil, error: error)
+                
             } else {
-                if let studentJson = result.valueForKey("result")![0] {
-                    if let objId = studentJson.valueForKey("ObjectId") {
-                        self.objectId = objId
-                        completionHandler(result: objId, error: nil)
+                
+                if let studentsList: [AnyObject] = result.valueForKey("results") as? [AnyObject] {
+                    
+                    if let userJson: AnyObject = studentsList[0] as AnyObject? {
+                        
+                        let userObj = Student(studentJson: userJson)
+                        
+                        self.objectId = userObj.getObjectId()
+                        completionHandler(result: self.objectId, error: nil)
+                    
                     } else {
+                        
                         completionHandler(result: nil, error: nil)
+                        
                     }
+                    
+                } else {
+                    
+                    completionHandler(result: nil, error: NSError())
+                    
                 }
+                
             }
             
         }
-        
         
     }
 
@@ -201,7 +223,7 @@ extension OTMClient {
         }
     }
     
-    func putUserLocation(objectID: String, location: String, link: String, latitude: String, longitude: String, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
+    func putUserLocation(objectID: String, location: String, link: String, latitude: Double, longitude: Double, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
         
         let url: String = "\(OTMClient.Constants.parseApiUrl)/\(objectID)"
         let headerParams: [String: String] = OTMClient.Constants.headerParams
