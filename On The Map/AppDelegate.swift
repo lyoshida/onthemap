@@ -61,3 +61,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // Mapkit reference
 // http://stackoverflow.com/questions/27349612/how-do-i-add-pins-annotations-with-xcode-6-swift
+// http://stackoverflow.com/questions/26991473/mkpointannotations-touch-event-in-swift
