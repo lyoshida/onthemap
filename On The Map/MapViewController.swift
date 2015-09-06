@@ -12,8 +12,8 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet var mapView: MKMapView!
-    @IBOutlet weak var pinButton: UIBarButtonItem!
-    @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var mapLocationButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,26 +59,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             return nil
         }
-//        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin") as? MKPinAnnotationView
-//        
-//        if (annotationView == nil) {
-//            return nil
-//        } else {
-//            annotationView!.annotation = annotation
-//            annotationView!.canShowCallout = true
-//            annotationView!.animatesDrop = true
-//            
-//            let linkButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-//            linkButton.frame.size.width = 44
-//            linkButton.frame.size.height = 44
-//            linkButton.backgroundColor = UIColor.blueColor()
-//            linkButton.setImage(UIImage(named: "View link"), forState: .Normal)
-//            
-//            annotationView?.rightCalloutAccessoryView = linkButton
-//            
-//        }
-//        
-//        return annotationView
     }
     
     func addPins(forceReload: Bool) {
@@ -113,7 +93,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     // Checks if there is a previous location before presenting the MapViewLocationController
-    @IBAction func MapViewLocation(sender: UIBarButtonItem) {
+    @IBAction func MapViewLocation(sender: UIButton) {
         
         OTMClient.sharedInstance().getLoggedUserObjectId({ result, error in
             if let error = error {
@@ -147,7 +127,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         })
     }
     
-    @IBAction func refreshData(sender: UIBarButtonItem) {
+    @IBAction func refreshData(sender: UIButton) {
         self.addPins(true)
     }
     

@@ -410,15 +410,43 @@
                                 <animations/>
                                 <items>
                                     <navigationItem title="On The Map" id="gKE-XW-LFP">
-                                        <barButtonItem key="leftBarButtonItem" image="pin" id="AZW-6U-Ap1" userLabel="Pin">
-                                            <connections>
-                                                <action selector="MapViewLocation:" destination="fwy-Xd-E3j" id="8d6-Nk-DJk"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="o0D-eO-LD9">
-                                            <connections>
-                                                <action selector="refreshData:" destination="fwy-Xd-E3j" id="SIZ-LS-xRi"/>
-                                            </connections>
+                                        <barButtonItem key="leftBarButtonItem" title="Log out" id="6H9-pY-et5"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="ass-49-ccn">
+                                            <view key="customView" contentMode="scaleToFill" id="6aJ-NQ-YyM">
+                                                <rect key="frame" x="0.0" y="0.0" width="133" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfK-5X-aj2" userLabel="refreshButton">
+                                                        <rect key="frame" x="103" y="4" width="25" height="25"/>
+                                                        <animations/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="PBm-7X-YGU"/>
+                                                            <constraint firstAttribute="width" constant="25" id="wtb-XC-HiA"/>
+                                                        </constraints>
+                                                        <state key="normal" image="refresh"/>
+                                                        <connections>
+                                                            <action selector="refreshData:" destination="fwy-Xd-E3j" eventType="touchUpInside" id="i57-T3-xt1"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="don-D7-jND" userLabel="pinButton">
+                                                        <rect key="frame" x="51" y="2" width="30" height="30"/>
+                                                        <animations/>
+                                                        <state key="normal" backgroundImage="pin">
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="MapViewLocation:" destination="fwy-Xd-E3j" eventType="touchUpInside" id="jSS-Qb-WAH"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="centerY" secondItem="WfK-5X-aj2" secondAttribute="centerY" id="2nD-aF-vgD"/>
+                                                    <constraint firstItem="WfK-5X-aj2" firstAttribute="leading" secondItem="don-D7-jND" secondAttribute="trailing" constant="11" id="DJy-yj-0Rl"/>
+                                                    <constraint firstAttribute="centerY" secondItem="don-D7-jND" secondAttribute="centerY" id="lYL-L8-KdQ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="WfK-5X-aj2" secondAttribute="trailing" constant="5" id="zoi-Kz-btr"/>
+                                                </constraints>
+                                            </view>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -442,7 +470,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="mXc-U1-n95"/>
                     <connections>
+                        <outlet property="mapLocationButton" destination="don-D7-jND" id="1p3-5B-kiC"/>
                         <outlet property="mapView" destination="FPC-Qo-UyC" id="vTE-LP-eF5"/>
+                        <outlet property="refreshButton" destination="WfK-5X-aj2" id="eFf-Lu-rER"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xq6-ci-NsD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -474,6 +504,7 @@
         <image name="list" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
         <image name="pin" width="32" height="32"/>
+        <image name="refresh" width="38" height="38"/>
         <image name="udacity" width="256" height="256"/>
     </resources>
 </document>
