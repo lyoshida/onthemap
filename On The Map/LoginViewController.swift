@@ -48,13 +48,11 @@ class LoginViewController : UIViewController {
             
         } else {
             
-            self.activityIndicator.hidden = false
-            self.activityIndicator.startAnimating()
+            self.loginActivityOn()
             
             OTMClient.sharedInstance().login(usernameTextField.text, password: passwordTextField.text, completionHandler: { success, statusCode, errorString in
                 
-                self.activityIndicator.hidden = true
-                self.activityIndicator.stopAnimating()
+                self.loginActivityOff()
                 
                 if success == false {
                     
@@ -115,5 +113,37 @@ class LoginViewController : UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         })
         
+    }
+    
+    /**
+        Disables login controls and shows activity indicator
+    */
+    func loginActivityOn() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
+            self.usernameTextField.enabled = false
+            self.passwordTextField.enabled = false
+            self.loginButton.enabled = false
+            self.usernameTextField.alpha = 0.5
+            self.passwordTextField.alpha = 0.5
+            self.loginButton.alpha = 0.5
+        })
+    }
+    
+    /**
+        Enables login controls and hides activity indicator
+    */
+    func loginActivityOff() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.hidden = true
+            self.activityIndicator.stopAnimating()
+            self.usernameTextField.enabled = true
+            self.passwordTextField.enabled = true
+            self.loginButton.enabled = true
+            self.usernameTextField.alpha = 1
+            self.passwordTextField.alpha = 1
+            self.loginButton.alpha = 1
+        })
     }
 }
