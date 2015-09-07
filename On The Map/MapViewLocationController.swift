@@ -145,7 +145,7 @@ class MapViewLocationController: UIViewController {
     }
     
     /**
-    Disables login controls and shows activity indicator
+    Disables submit button and shows activity indicator
     */
     func activityOn() {
         dispatch_async(dispatch_get_main_queue(), {
@@ -157,7 +157,7 @@ class MapViewLocationController: UIViewController {
     }
     
     /**
-    Enables login controls and hides activity indicator
+    Enables submit button and hides activity indicator
     */
     func activityOff() {
         dispatch_async(dispatch_get_main_queue(), {
