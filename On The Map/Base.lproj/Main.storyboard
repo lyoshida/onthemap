@@ -124,11 +124,49 @@
                                 <animations/>
                                 <items>
                                     <navigationItem title="On The Map" id="g2b-Oc-qpw">
-                                        <barButtonItem key="leftBarButtonItem" image="pin" id="SCL-zO-mBf"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="xIz-ar-cgb">
+                                        <barButtonItem key="leftBarButtonItem" title="Log out" id="gEz-Kj-Pk1">
                                             <connections>
-                                                <action selector="reloadList:" destination="e4u-V5-hjZ" id="z1j-S0-L1l"/>
+                                                <action selector="logOut:" destination="e4u-V5-hjZ" id="22X-uT-xnh"/>
                                             </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="BFV-6t-Y0g">
+                                            <view key="customView" contentMode="scaleToFill" id="XwS-mE-GMy">
+                                                <rect key="frame" x="0.0" y="0.0" width="133" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V19-Rq-Hgm" userLabel="refreshButton">
+                                                        <rect key="frame" x="103" y="4" width="25" height="25"/>
+                                                        <animations/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="EmN-H1-jFc"/>
+                                                            <constraint firstAttribute="width" constant="25" id="OAE-PE-6RR"/>
+                                                        </constraints>
+                                                        <state key="normal" image="refresh"/>
+                                                        <connections>
+                                                            <action selector="refreshData:" destination="fwy-Xd-E3j" eventType="touchUpInside" id="Cjc-6e-I16"/>
+                                                            <action selector="refreshData:" destination="e4u-V5-hjZ" eventType="touchUpInside" id="KZd-cr-b8g"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XF4-QB-Zpb" userLabel="pinButton">
+                                                        <rect key="frame" x="51" y="2" width="30" height="30"/>
+                                                        <animations/>
+                                                        <state key="normal" backgroundImage="pin">
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="MapViewLocation:" destination="e4u-V5-hjZ" eventType="touchUpInside" id="VZS-3S-sjF"/>
+                                                            <action selector="MapViewLocation:" destination="fwy-Xd-E3j" eventType="touchUpInside" id="dnt-Wh-Q5S"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="centerY" secondItem="V19-Rq-Hgm" secondAttribute="centerY" id="4df-8D-FHq"/>
+                                                    <constraint firstItem="V19-Rq-Hgm" firstAttribute="leading" secondItem="XF4-QB-Zpb" secondAttribute="trailing" constant="11" id="NUa-Qn-zy2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="V19-Rq-Hgm" secondAttribute="trailing" constant="5" id="ira-fB-U6U"/>
+                                                    <constraint firstAttribute="centerY" secondItem="XF4-QB-Zpb" secondAttribute="centerY" id="ljx-n1-BBQ"/>
+                                                </constraints>
+                                            </view>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -175,6 +213,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="List" image="list" id="Q9Y-FD-xX3"/>
                     <connections>
+                        <outlet property="logOutButton" destination="gEz-Kj-Pk1" id="iDg-qz-iCy"/>
+                        <outlet property="mapLocationButton" destination="XF4-QB-Zpb" id="N5v-yJ-CGR"/>
+                        <outlet property="refreshButton" destination="V19-Rq-Hgm" id="leA-Qb-LK5"/>
                         <outlet property="studentTable" destination="J5c-Us-QM1" id="x2P-xo-rFO"/>
                     </connections>
                 </viewController>

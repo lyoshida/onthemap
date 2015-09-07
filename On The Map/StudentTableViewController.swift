@@ -12,6 +12,10 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var studentTable: UITableView!
     
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var mapLocationButton: UIButton!
+    @IBOutlet weak var logOutButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         studentTable.dataSource = self
@@ -62,8 +66,78 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    @IBAction func reloadList(sender: UIBarButtonItem) {
+    @IBAction func refreshData(sender: UIButton) {
         self.loadStudents(true)
     }
     
+    // Checks if there is a previous location before presenting the MapViewLocationController
+    @IBAction func MapViewLocation(sender: UIButton) {
+        
+        OTMClient.sharedInstance().getLoggedUserObjectId({ result, error in
+            if let error = error {
+                
+                self.showErrorAlert("Error", message: "Error retriving user's ObjectID", cancelButtonTitle: "Dismiss")
+                
+            } else {
+                
+                if let objId = result {
+                    
+                    var alert = UIAlertController(title: "Warning", message: "A previous location exists. Do you want to overwrite it?", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) in
+                        
+                        // Do nothing
+                        
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                        
+                        let mapViewLocationcontroller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewLocationController") as! UIViewController
+                        self.presentViewController(mapViewLocationcontroller, animated: true, completion: nil)
+                        
+                    }))
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                }
+                
+            }
+        })
+    }
+
+    
+    @IBAction func logOut(sender: UIBarButtonItem) {
+        OTMClient.sharedInstance().deleteSession() { result, error in
+            
+            println(result)
+            
+            if let error = error {
+                
+                self.showErrorAlert("Error", message: "Could not log out", cancelButtonTitle: "Dismiss")
+                
+            } else {
+                
+                let loginController = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.presentViewController(loginController, animated: true, completion: nil)
+                })
+                
+            }
+        }
+        
+    }
+
+    func showErrorAlert(title: String?, message: String, cancelButtonTitle: String) -> Void {
+        
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) in
+            
+            // Do nothing
+            
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
 }
