@@ -74,12 +74,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
                 for studentJson in result as! [AnyObject] {
                     
-                    let student = Student(studentJson: studentJson)
+                    let student = StudentInformation(studentJson: studentJson as! [String: AnyObject])
                     
                     let pin = MKPointAnnotation()
                     pin.coordinate = CLLocationCoordinate2DMake(student.getLatitude(), student.getLongitude())
                     pin.title = student.getFullName()
-                    pin.subtitle = student.getMediaUrl()
+                    pin.subtitle = student.getMediaURL()
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         self.mapView.addAnnotation(pin)

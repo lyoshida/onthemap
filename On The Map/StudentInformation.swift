@@ -1,5 +1,5 @@
 //
-//  Student.swift
+//  StudentInformation.swift
 //  On The Map
 //
 //  Created by Luis Yoshida on 8/26/15.
@@ -8,12 +8,14 @@
 
 import Foundation
 
-struct Student {
+struct StudentInformation {
     
     var student: [String: AnyObject]
     
-    init(studentJson: AnyObject) {
-        self.student = studentJson as! [String: AnyObject]
+    init(studentJson: [String: AnyObject]) {
+        
+        self.student = studentJson
+        
     }
     
     func getFullName() -> String{
@@ -32,14 +34,14 @@ struct Student {
         return "\(firstName) \(lastName)"
     }
     
-    func getMediaUrl() -> String? {
+    func getMediaURL() -> String? {
         
-        var mediaUrl: String? = nil
+        var mediaURL: String? = nil
         if let url = self.student["mediaURL"] as? String{
-            mediaUrl = url
+            mediaURL = url
         }
         
-        return mediaUrl
+        return mediaURL
     }
     
     func getLatitude() -> Double {
@@ -68,4 +70,5 @@ struct Student {
         }
         return objectId
     }
+    
 }

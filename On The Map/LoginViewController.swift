@@ -45,14 +45,14 @@ class LoginViewController : UIViewController {
             
         } else {
             
-            OTMClient.sharedInstance().login(usernameTextField.text, password: passwordTextField.text, completionHandler: { success, error in
+            OTMClient.sharedInstance().login(usernameTextField.text, password: passwordTextField.text, completionHandler: { success, statusCode, errorString in
                 
                 if success == false {
                     
-                    if let error = error {
-                        
-                        self.showErrorAlert("Error", message: error.localizedDescription, cancelButtonTitle: "Dismiss")
+                    if let errorString = errorString {
+                        self.showErrorAlert("Error", message: errorString, cancelButtonTitle: "Dismiss")
                     }
+                    
                     
                 } else {
                     // Get User details

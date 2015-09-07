@@ -173,9 +173,9 @@ extension OTMClient {
                 
                 if let studentsList: [AnyObject] = result.valueForKey("results") as? [AnyObject] {
                     
-                    if let userJson: AnyObject = studentsList[0] as AnyObject? {
+                    if let userJson = studentsList[0] as? [String: AnyObject] {
                         
-                        let userObj = Student(studentJson: userJson)
+                        let userObj = StudentInformation(studentJson: userJson)
                         
                         self.objectId = userObj.getObjectId()
                         completionHandler(result: self.objectId, error: nil)

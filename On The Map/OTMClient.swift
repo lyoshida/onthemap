@@ -24,12 +24,13 @@ class OTMClient : NSObject {
         
         session = NSURLSession.sharedSession()
         super.init()
+        
     }
     
     func taskForGETMethod(url: String, parameters: [String: AnyObject]?, headerParams: [String: String]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        var urlString : String
         // Build the URL
+        var urlString : String
         if let params = parameters {
             urlString = "\(url)\(OTMClient.escapedParameters(params))"
         } else {
@@ -39,19 +40,24 @@ class OTMClient : NSObject {
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         
+        // Set header parameters to the request object
         if let headerParams = headerParams {
             for (key, value) in headerParams {
                 request.addValue(value, forHTTPHeaderField: key)
             }
         }
         
-        let task = session.dataTaskWithRequest(request) {
-            data, response, downloadError in
+        
+        let task = session.dataTaskWithRequest(request) { data, response, downloadError in
             
             if let error = downloadError {
+                
                 completionHandler(result: nil, error: downloadError)
+                
             } else {
+                
                 OTMClient.parseJSONWithCompletionHandler(data, removeStart: true, completionHandler: completionHandler)
+                
             }
         }
         
@@ -60,10 +66,11 @@ class OTMClient : NSObject {
         return task
     }
     
+    
     func taskForPOSTMethod(url: String, parameters: [String: AnyObject]?, headerParams: [String: String]?, jsonBody: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        var urlString : String
         // Build the URL
+        var urlString : String
         if let params = parameters {
             urlString = "\(url)\(OTMClient.escapedParameters(params))"
         } else {
@@ -74,7 +81,7 @@ class OTMClient : NSObject {
         let request = NSMutableURLRequest(URL: url!)
         var jsonifyError: NSError? = nil
         
-        // Set header Params
+        // Set header parameter to the request object
         if let headerParams = headerParams {
             for (key, value) in headerParams {
                 request.addValue(value, forHTTPHeaderField: key)
@@ -88,13 +95,16 @@ class OTMClient : NSObject {
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(jsonBody, options: nil, error: &jsonifyError)
         
         // Make the request
-        let task = session.dataTaskWithRequest(request) {
-            data, response, downloadError in
+        let task = session.dataTaskWithRequest(request) { data, response, downloadError in
             
             if let error = downloadError {
+                
                 completionHandler(result: nil, error: downloadError)
+                
             } else {
+                
                 OTMClient.parseJSONWithCompletionHandler(data, removeStart: true, completionHandler: completionHandler)
+                
             }
         }
         
