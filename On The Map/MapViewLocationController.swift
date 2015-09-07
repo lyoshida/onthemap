@@ -20,14 +20,7 @@ class MapViewLocationController: UIViewController {
     @IBOutlet weak var locationSelectView: UIView!
     @IBOutlet weak var confirmView: UIView!
     @IBOutlet weak var mapView: MKMapView!
-    
-//    var annotation: MKAnnotation!
-//    var localSearchRequest: MKLocalSearchRequest!
-//    var localSearch: MKLocalSearch!
-//    var localSearchResponse: MKLocalSearchResponse!
-//    var error: NSError!
-//    var pointAnnotation: MKPointAnnotation!
-//    var pinAnnotationView: MKPinAnnotationView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var latitude: Double? = nil
     var longitude: Double? = nil
@@ -44,6 +37,8 @@ class MapViewLocationController: UIViewController {
         if let linkTextField = linkTextField {
             linkTextField.attributedPlaceholder = NSAttributedString(string:"Share your link here", attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         }
+        
+        self.activityIndicator.hidden = true
         self.confirmView.hidden = true
     }
 
@@ -87,9 +82,13 @@ class MapViewLocationController: UIViewController {
     
     @IBAction func submitLocation(sender: UIButton) {
         
+        self.activityOn()
+        
         if let objId =  OTMClient.sharedInstance().objectId {
             
             OTMClient.sharedInstance().putUserLocation(objId, location: self.localName!, link: self.linkTextField.text!, latitude: self.latitude!, longitude: self.longitude!) { result, error in
+                
+                self.activityOff()
                 
                 if let error = error {
                     
@@ -109,6 +108,8 @@ class MapViewLocationController: UIViewController {
         } else {
             
             OTMClient.sharedInstance().postUserLocation(self.localName!, link: self.linkTextField.text!, latitude: self.latitude!, longitude: self.longitude!) { result, error in
+                
+                self.activityOff()
                 
                 if let error = error {
                     
@@ -142,6 +143,32 @@ class MapViewLocationController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
+    
+    /**
+    Disables login controls and shows activity indicator
+    */
+    func activityOn() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
+            self.submitButton.enabled = false
+            self.submitButton.alpha = 0.5
+        })
+    }
+    
+    /**
+    Enables login controls and hides activity indicator
+    */
+    func activityOff() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.hidden = true
+            self.activityIndicator.stopAnimating()
+            self.submitButton.enabled = true
+            self.submitButton.alpha = 1
+        })
+    }
+
+    
     
 }
 

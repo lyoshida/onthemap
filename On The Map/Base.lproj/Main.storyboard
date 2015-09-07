@@ -388,6 +388,11 @@
                                             <action selector="submitLocation:" destination="dM3-l2-GJn" eventType="touchUpInside" id="JbG-MQ-5nD"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="h2b-PS-j8z">
+                                        <rect key="frame" x="282" y="368" width="37" height="37"/>
+                                        <animations/>
+                                        <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -396,8 +401,10 @@
                                     <constraint firstAttribute="trailing" secondItem="KNU-5B-QpE" secondAttribute="trailing" id="29f-zn-S4O"/>
                                     <constraint firstItem="KNU-5B-QpE" firstAttribute="leading" secondItem="Fmq-su-knT" secondAttribute="leading" id="3AR-72-Tlg"/>
                                     <constraint firstAttribute="trailing" secondItem="hAC-wA-zUg" secondAttribute="trailing" constant="35" id="8Nm-9B-Cy6"/>
+                                    <constraint firstItem="fVo-wp-I4x" firstAttribute="top" secondItem="h2b-PS-j8z" secondAttribute="bottom" constant="15" id="KaF-Dc-AnZ"/>
                                     <constraint firstItem="hAC-wA-zUg" firstAttribute="leading" secondItem="Fmq-su-knT" secondAttribute="leading" constant="35" id="USM-qX-kEd"/>
                                     <constraint firstItem="KNU-5B-QpE" firstAttribute="top" secondItem="Fmq-su-knT" secondAttribute="top" constant="157" id="Yzg-Au-ti8"/>
+                                    <constraint firstAttribute="centerX" secondItem="h2b-PS-j8z" secondAttribute="centerX" id="kab-UO-QnX"/>
                                     <constraint firstAttribute="bottom" secondItem="KNU-5B-QpE" secondAttribute="bottom" id="mWT-l5-8D4"/>
                                     <constraint firstAttribute="centerX" secondItem="fVo-wp-I4x" secondAttribute="centerX" id="nYC-G9-u8Z"/>
                                     <constraint firstAttribute="bottom" secondItem="fVo-wp-I4x" secondAttribute="bottom" constant="40" id="sJf-em-OSp"/>
@@ -434,6 +441,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="h2b-PS-j8z" id="JoF-kK-b0U"/>
                         <outlet property="confirmView" destination="Fmq-su-knT" id="z65-NZ-Q8y"/>
                         <outlet property="findLocationButton" destination="vwm-Bi-swI" id="PWT-uw-OW3"/>
                         <outlet property="linkTextField" destination="hAC-wA-zUg" id="xye-df-LMM"/>
