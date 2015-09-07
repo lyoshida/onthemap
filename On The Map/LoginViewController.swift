@@ -64,7 +64,7 @@ class LoginViewController : UIViewController {
                 } else {
                     // Get User details
                     
-                    OTMClient.sharedInstance().getUserDetails({success, statusCode, errorString in
+                    OTMClient.sharedInstance().getUserDetails({ success, statusCode, errorString in
                         if success == true {
                             
                             self.completeLogin()
@@ -141,9 +141,9 @@ class LoginViewController : UIViewController {
             self.usernameTextField.enabled = true
             self.passwordTextField.enabled = true
             self.loginButton.enabled = true
-            self.usernameTextField.alpha = 1
-            self.passwordTextField.alpha = 1
-            self.loginButton.alpha = 1
+            self.usernameTextField.alpha = 0.7
+            self.passwordTextField.alpha = 0.7
+            self.loginButton.alpha = 0.7
         })
     }
 }

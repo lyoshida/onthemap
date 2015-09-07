@@ -62,8 +62,7 @@ extension OTMClient {
     // Get user details
     func getUserDetails(completionHandler: (success: Bool, statusCode: String?, errorString: String?) -> Void) {
         
-        if let id = self.userId {
-            userId = id
+        if let userId = self.userId {
             
             let url: String = "\(OTMClient.Constants.baseUrl)\(OTMClient.Methods.userDataUrl)\(userId)"
             
@@ -72,7 +71,6 @@ extension OTMClient {
                     completionHandler(success: false, statusCode: nil, errorString: "Error retrieving user details.")
                     return
                 } else {
-                    println(result)
                     if let firstName = result.valueForKey("user")!.valueForKey("first_name") as? String {
                         self.userFirstName = firstName
                     }

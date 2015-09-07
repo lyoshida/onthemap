@@ -21,13 +21,13 @@ class MapViewLocationController: UIViewController {
     @IBOutlet weak var confirmView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
-    var annotation: MKAnnotation!
-    var localSearchRequest: MKLocalSearchRequest!
-    var localSearch: MKLocalSearch!
-    var localSearchResponse: MKLocalSearchResponse!
-    var error: NSError!
-    var pointAnnotation: MKPointAnnotation!
-    var pinAnnotationView: MKPinAnnotationView!
+//    var annotation: MKAnnotation!
+//    var localSearchRequest: MKLocalSearchRequest!
+//    var localSearch: MKLocalSearch!
+//    var localSearchResponse: MKLocalSearchResponse!
+//    var error: NSError!
+//    var pointAnnotation: MKPointAnnotation!
+//    var pinAnnotationView: MKPinAnnotationView!
     
     var latitude: Double? = nil
     var longitude: Double? = nil
@@ -58,31 +58,29 @@ class MapViewLocationController: UIViewController {
             
             locationSelectView.hidden = true
             confirmView.hidden = false
-            localSearchRequest = MKLocalSearchRequest()
-            localSearchRequest.naturalLanguageQuery = self.locationTextField.text
-            localSearch = MKLocalSearch(request: localSearchRequest)
-            localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
+            
+            CLGeocoder().geocodeAddressString(locationTextField.text, completionHandler: { (placemarks, error) -> Void in
                 
-                if localSearchResponse == nil {
-                    self.showErrorAlert(nil, message: "Place not found", cancelButtonTitle: "try again?")
-                    self.locationSelectView.hidden = false
-                    self.confirmView.hidden = true
-                    return
-                }
+                if let placemark = placemarks?[0] as? CLPlacemark {
+                    
+                    self.latitude = placemark.location.coordinate.latitude
+                    self.longitude = placemark.location.coordinate.longitude
+                    self.localName = placemark.name as String
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.mapView.centerCoordinate = CLLocationCoordinate2D(latitude: placemark.location.coordinate.latitude, longitude: placemark.location.coordinate.longitude)
+                    })
+                    
+                    var annotation = MKPointAnnotation()
+                    annotation.title = self.localName
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
 
-                self.latitude = localSearchResponse.boundingRegion.center.latitude as Double
-                self.longitude = localSearchResponse.boundingRegion.center.longitude as Double
-                self.localName = localSearchResponse.mapItems[0].name
-                
-                self.pointAnnotation = MKPointAnnotation()
-                self.pointAnnotation.title = self.localName
-                self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
-                
-                self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
-                self.mapView.centerCoordinate = self.pointAnnotation.coordinate
-                self.mapView.addAnnotation(self.pinAnnotationView.annotation)
-                
-            }
+                    self.mapView.addAnnotation(annotation)
+                    
+                    
+                }
+            
+            })
 
         }
     }
