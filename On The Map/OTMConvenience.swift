@@ -23,30 +23,39 @@ extension OTMClient {
         
         let task = taskForPOSTMethod(url, parameters: nil, headerParams: nil, jsonBody: json) { result, error in
             
-            print(result)
-            print(result["status"])
-            if let status = result["status"] as? Int  {
-                if let errorMessage = result["error"] as? String {
-                    
-                    completionHandler(success: false, statusCode: status, errorString: errorMessage)
-                    
-                }
+            if let error = error {
+                
+                // Connection Error
+                completionHandler(success: false, statusCode: nil, errorString: error.localizedDescription)
                 
             } else {
                 
-                if let session = result.valueForKey("session") as? NSDictionary {
-                    if let sessionId = session.valueForKey("id") as? String {
-                        self.sessionId = sessionId
+                // Check for error such as invalid credentials
+                if let status = result["status"] as? Int  {
+                    if let errorMessage = result["error"] as? String {
+                        
+                        completionHandler(success: false, statusCode: status, errorString: errorMessage)
+                        
                     }
-                }
-                if let account = result.valueForKey("account") as? NSDictionary {
-                    if let userId = account.valueForKey("key") as? String {
-                        self.userId = userId
+                    
+                } else {
+                    
+                    if let session = result.valueForKey("session") as? NSDictionary {
+                        if let sessionId = session.valueForKey("id") as? String {
+                            self.sessionId = sessionId
+                        }
                     }
+                    if let account = result.valueForKey("account") as? NSDictionary {
+                        if let userId = account.valueForKey("key") as? String {
+                            self.userId = userId
+                        }
+                    }
+                    
+                    completionHandler(success: true, statusCode: nil, errorString: nil)
                 }
                 
-                completionHandler(success: true, statusCode: nil, errorString: nil)
             }
+            
         }
     }
     
