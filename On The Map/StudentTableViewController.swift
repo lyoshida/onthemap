@@ -49,6 +49,21 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let student = OTMClient.sharedInstance().studentList![indexPath.row]
+        if let url = student["mediaURL"] as? String {
+            if let mediaURL = NSURL(string: url) {
+                UIApplication.sharedApplication().openURL(mediaURL)
+            }
+            
+        } else {
+            self.showErrorAlert("Error", message: "No URL for this student", cancelButtonTitle: "Dismiss")
+        }
+        
+        
+    }
+    
     func loadStudents(forceReload: Bool) {
         OTMClient.sharedInstance().getStudents(forceReload) { result, error in
             if let error = error {
