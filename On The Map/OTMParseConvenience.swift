@@ -197,7 +197,8 @@ extension OTMClient {
         }
         
     }
-
+    
+    // Post user information
     func postUserLocation(location: String, link: String, latitude: Double, longitude: Double, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
         
         let url: String = "\(OTMClient.Constants.parseApiUrl)"
@@ -223,6 +224,7 @@ extension OTMClient {
         }
     }
     
+    //Update user information
     func putUserLocation(objectID: String, location: String, link: String, latitude: Double, longitude: Double, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
         
         let url: String = "\(OTMClient.Constants.parseApiUrl)/\(objectID)"

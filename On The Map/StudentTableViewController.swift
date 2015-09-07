@@ -64,6 +64,7 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
+    // Refresh list of students
     func loadStudents(forceReload: Bool) {
         OTMClient.sharedInstance().getStudents(forceReload) { result, error in
             if let error = error {
@@ -120,7 +121,7 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
         })
     }
 
-    
+    // Log out
     @IBAction func logOut(sender: UIBarButtonItem) {
         OTMClient.sharedInstance().deleteSession() { result, error in
             

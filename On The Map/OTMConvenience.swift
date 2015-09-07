@@ -44,6 +44,7 @@ extension OTMClient {
         }
     }
     
+    // Get user details
     func getUserDetails(completionHandler: (success: Bool, statusCode: String?, errorString: String?) -> Void) {
         
         var userId: String = ""

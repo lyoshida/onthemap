@@ -64,8 +64,7 @@ class MapViewLocationController: UIViewController {
             localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
                 
                 if localSearchResponse == nil {
-                    var alert = UIAlertView(title: nil, message: "Place not found", delegate: self, cancelButtonTitle: "try again?")
-                    alert.show()
+                    self.showErrorAlert(nil, message: "Place not found", cancelButtonTitle: "try again?")
                     self.locationSelectView.hidden = false
                     self.confirmView.hidden = true
                     return

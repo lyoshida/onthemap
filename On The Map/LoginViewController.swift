@@ -78,15 +78,16 @@ class LoginViewController : UIViewController {
     
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
+            
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! UITabBarController
             
             self.presentViewController(controller, animated: true, completion: nil)
         
         })
         
-        
     }
     
+    // Display messages in the status Label
     func displayMessage(message: String) {
         statusLabel.text = message
     }
