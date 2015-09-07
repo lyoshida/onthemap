@@ -14,6 +14,7 @@ class LoginViewController : UIViewController {
     @IBOutlet weak var passwordTextField: PaddingTextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class LoginViewController : UIViewController {
         gradient.frame = self.view.bounds
         gradient.colors = [UIColor(red: 250.0/255.0, green: 172.0/255.0, blue: 135.0/255.0, alpha: 1.0).CGColor, UIColor(red: 247.0/255.0, green: 140.0/255.0, blue: 53.0/255.0, alpha: 1.0).CGColor]
         self.view.layer.insertSublayer(gradient, atIndex: 0)
+        
+        self.activityIndicator.hidden = true
         
     }
     
@@ -45,7 +48,13 @@ class LoginViewController : UIViewController {
             
         } else {
             
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
+            
             OTMClient.sharedInstance().login(usernameTextField.text, password: passwordTextField.text, completionHandler: { success, statusCode, errorString in
+                
+                self.activityIndicator.hidden = true
+                self.activityIndicator.stopAnimating()
                 
                 if success == false {
                     

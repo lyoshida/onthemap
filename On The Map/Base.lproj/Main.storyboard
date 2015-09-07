@@ -79,6 +79,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="T3i-6N-UcK">
+                                <rect key="frame" x="290" y="248" width="20" height="20"/>
+                                <animations/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,12 +95,21 @@
                             <constraint firstAttribute="centerX" secondItem="jt2-ax-7GW" secondAttribute="centerX" id="M2z-Ul-hPE"/>
                             <constraint firstAttribute="centerX" secondItem="TpR-hV-EEo" secondAttribute="centerX" id="RNZ-fV-Dod"/>
                             <constraint firstItem="jt2-ax-7GW" firstAttribute="top" secondItem="mle-Dw-2mi" secondAttribute="bottom" constant="44" id="RPi-pk-1Ib"/>
+                            <constraint firstAttribute="centerY" secondItem="T3i-6N-UcK" secondAttribute="centerY" id="TlJ-f1-Mz0"/>
                             <constraint firstItem="5pS-oa-aNv" firstAttribute="trailing" secondItem="M8F-JE-jhh" secondAttribute="trailingMargin" id="iMs-VT-Iq9"/>
+                            <constraint firstItem="TpR-hV-EEo" firstAttribute="top" secondItem="T3i-6N-UcK" secondAttribute="bottom" constant="8" id="x7P-eA-d8N"/>
                             <constraint firstItem="5pS-oa-aNv" firstAttribute="leading" secondItem="M8F-JE-jhh" secondAttribute="leadingMargin" id="z4B-Kd-Gi4"/>
                             <constraint firstItem="5pS-oa-aNv" firstAttribute="top" secondItem="6ck-NZ-fdw" secondAttribute="bottom" constant="8" id="zeR-aa-uon"/>
+                            <constraint firstAttribute="centerX" secondItem="T3i-6N-UcK" secondAttribute="centerX" id="zfS-G1-H2c"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TlJ-f1-Mz0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="T3i-6N-UcK" id="Vf0-tI-UFW"/>
                         <outlet property="loginButton" destination="6ck-NZ-fdw" id="W0Y-i2-rug"/>
                         <outlet property="passwordTextField" destination="pFe-OK-gMG" id="Mui-iM-1Q0"/>
                         <outlet property="statusLabel" destination="5pS-oa-aNv" id="HLY-fu-yfy"/>
