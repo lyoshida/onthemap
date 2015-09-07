@@ -104,7 +104,6 @@ class OTMClient : NSObject {
         
     }
     
-    
     /* Helper function: Given a dictionary of parameters, convert to a string for a url */
     class func escapedParameters(parameters: [String : AnyObject]) -> String {
         

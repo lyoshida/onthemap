@@ -70,4 +70,35 @@ extension OTMClient {
         }
     }
     
+    // Log out function
+    func deleteSession(completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> Void {
+        
+        let url = NSURL(string: "\(OTMClient.Constants.baseUrl)\(OTMClient.Methods.authUrl)")
+        let request = NSMutableURLRequest(URL: url!)
+        
+        request.HTTPMethod = "DELETE"
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies as! [NSHTTPCookie] {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value!, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil {
+                completionHandler(result: nil, error: error)
+            } else {
+                OTMClient.parseJSONWithCompletionHandler(data, removeStart: true, completionHandler: completionHandler)
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
+    
 }

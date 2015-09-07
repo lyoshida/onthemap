@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="O7v-tE-fYa">
             <objects>
-                <viewController id="38R-cu-fZ7" customClass="LoginViewController" customModule="On_The_Map" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="38R-cu-fZ7" customClass="LoginViewController" customModule="On_The_Map" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mle-Dw-2mi"/>
                         <viewControllerLayoutGuide type="bottom" id="lfv-NL-YDX"/>
@@ -410,7 +410,11 @@
                                 <animations/>
                                 <items>
                                     <navigationItem title="On The Map" id="gKE-XW-LFP">
-                                        <barButtonItem key="leftBarButtonItem" title="Log out" id="6H9-pY-et5"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Log out" id="6H9-pY-et5">
+                                            <connections>
+                                                <action selector="logOut:" destination="fwy-Xd-E3j" id="1F5-Lx-FRG"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="ass-49-ccn">
                                             <view key="customView" contentMode="scaleToFill" id="6aJ-NQ-YyM">
                                                 <rect key="frame" x="0.0" y="0.0" width="133" height="33"/>
@@ -470,6 +474,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="mXc-U1-n95"/>
                     <connections>
+                        <outlet property="logOutButton" destination="6H9-pY-et5" id="UsZ-Kf-1mW"/>
                         <outlet property="mapLocationButton" destination="don-D7-jND" id="1p3-5B-kiC"/>
                         <outlet property="mapView" destination="FPC-Qo-UyC" id="vTE-LP-eF5"/>
                         <outlet property="refreshButton" destination="WfK-5X-aj2" id="eFf-Lu-rER"/>

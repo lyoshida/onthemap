@@ -14,6 +14,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var mapLocationButton: UIButton!
+    @IBOutlet weak var logOutButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,6 +130,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func refreshData(sender: UIButton) {
         self.addPins(true)
+    }
+    
+    
+    @IBAction func logOut(sender: UIBarButtonItem) {
+        OTMClient.sharedInstance().deleteSession() { result, error in
+            
+            println(result)
+            
+            if let error = error {
+                
+                self.showErrorAlert("Error", message: "Could not log out", cancelButtonTitle: "Dismiss")
+                
+            } else {
+                
+                let loginController = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.presentViewController(loginController, animated: true, completion: nil)
+                })
+                
+            }
+        }
+        
     }
     
     func showErrorAlert(title: String?, message: String, cancelButtonTitle: String) -> Void {
