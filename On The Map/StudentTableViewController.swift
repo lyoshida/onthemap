@@ -35,11 +35,9 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("StudentTableCell", forIndexPath: indexPath) as! UITableViewCell
         
-        if let studentList = OTMClient.sharedInstance().studentList as [AnyObject]? {
-            let dict: NSDictionary = studentList[indexPath.row] as! NSDictionary
-            let firstName = dict["firstName"] as! String
-            let lastName = dict["lastName"] as! String
-            cell.textLabel!.text = "\(firstName) \(lastName)"
+        if let studentList = OTMClient.sharedInstance().studentList {
+            let student: StudentInformation = studentList[indexPath.row]
+            cell.textLabel!.text = student.fullName
             
             let image: UIImage = UIImage(named: "pin")!
             cell.imageView!.image = image
@@ -51,14 +49,16 @@ class StudentTableViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let student = OTMClient.sharedInstance().studentList![indexPath.row]
-        if let url = student["mediaURL"] as? String {
-            if let mediaURL = NSURL(string: url) {
+        let student: StudentInformation = OTMClient.sharedInstance().studentList![indexPath.row]
+        if student.mediaURL != "" {
+            if let mediaURL = NSURL(string: student.mediaURL) {
                 UIApplication.sharedApplication().openURL(mediaURL)
             }
             
         } else {
+            
             self.showErrorAlert("Error", message: "No URL for this student", cancelButtonTitle: "Dismiss")
+            
         }
         
         

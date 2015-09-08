@@ -18,7 +18,7 @@ class OTMClient : NSObject {
     var userLastName: String? = nil
     var objectId: String? = nil
     
-    var studentList: [AnyObject]? = nil
+    var studentList: [StudentInformation]? = nil
     
     override init() {
         

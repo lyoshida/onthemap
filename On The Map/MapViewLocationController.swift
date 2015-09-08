@@ -51,30 +51,49 @@ class MapViewLocationController: UIViewController {
         
         if locationTextField.text != "" {
             
+            self.activityOn()
+            
             locationSelectView.hidden = true
             confirmView.hidden = false
             
             CLGeocoder().geocodeAddressString(locationTextField.text, completionHandler: { (placemarks, error) -> Void in
                 
-                if let placemark = placemarks?[0] as? CLPlacemark {
+                self.activityOff()
+                
+                if let error = error {
                     
-                    self.latitude = placemark.location.coordinate.latitude
-                    self.longitude = placemark.location.coordinate.longitude
-                    self.localName = placemark.name as String
+                    self.showErrorAlert("Error", message: "No location found.", cancelButtonTitle: "Dismiss")
                     
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.mapView.centerCoordinate = CLLocationCoordinate2D(latitude: placemark.location.coordinate.latitude, longitude: placemark.location.coordinate.longitude)
-                    })
+                    self.locationSelectView.hidden = false
+                    self.confirmView.hidden = true
                     
-                    var annotation = MKPointAnnotation()
-                    annotation.title = self.localName
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
-
-                    self.mapView.addAnnotation(annotation)
+                } else {
                     
-                    
+                    if let placemark = placemarks?[0] as? CLPlacemark {
+                        
+                        self.latitude = placemark.location.coordinate.latitude
+                        self.longitude = placemark.location.coordinate.longitude
+                        self.localName = placemark.name as String
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.mapView.centerCoordinate = CLLocationCoordinate2D(latitude: placemark.location.coordinate.latitude, longitude: placemark.location.coordinate.longitude)
+                        })
+                        
+                        var annotation = MKPointAnnotation()
+                        annotation.title = self.localName
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
+                        
+                        self.mapView.addAnnotation(annotation)
+                        
+                        
+                    } else {
+                        
+                        self.showErrorAlert("Error", message: "No location found.", cancelButtonTitle: "Dismiss")
+                        self.locationSelectView.hidden = false
+                        self.confirmView.hidden = true
+                    }
                 }
-            
+                
             })
 
         }

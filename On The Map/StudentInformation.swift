@@ -10,76 +10,25 @@ import Foundation
 
 struct StudentInformation {
     
-    var student: [String: AnyObject]
+    var mediaURL: String
+    var firstName: String
+    var lastName: String
+    var fullName: String
+    var latitude: Double
+    var longitude: Double
+    var objectId: String
     
     init(studentJson: [String: AnyObject]) {
         
-        self.student = studentJson
+        self.firstName = studentJson["firstName"] as! String
+        self.lastName = studentJson["lastName"] as! String
+        self.fullName = "\(self.firstName) \(self.lastName)"
+        self.mediaURL = studentJson["mediaURL"] as! String
+        self.latitude = studentJson["latitude"] as! Double
+        self.longitude = studentJson["longitude"] as! Double
+        self.objectId = studentJson["objectId"] as! String
         
     }
-    
-    func getFullName() -> String{
-        
-        var firstName: String = ""
-        var lastName: String = ""
-        
-        if let fName = self.student["firstName"] as? String {
-            firstName = fName
-        }
-        
-        if let lName = self.student["lastName"] as? String {
-            lastName = lName
-        }
-        
-        return "\(firstName) \(lastName)"
-    }
-    
-    func getMediaURL() -> String? {
-        
-        var mediaURL: String? = nil
-        if let url = self.student["mediaURL"] as? String{
-            mediaURL = url
-        }
-        
-        return mediaURL
-    }
-    
-    func getLatitude() -> Double {
-        
-        var latitude: Double = 0.0
-        if let lat = self.student["latitude"] as? Double {
-            latitude = lat
-        }
-        return latitude
-        
-    }
-    
-    func getLongitude() -> Double {
-        
-        var longitude: Double = 0.0
-        if let long = self.student["longitude"] as? Double {
-            longitude = long
-        }
-        return longitude
-    }
-    
-    func getObjectId() -> String? {
-        var objectId: String? = nil
-        if let objId = self.student["objectId"] as? String {
-            objectId = objId
-        }
-        return objectId
-    }
-    
-    func getUpdatedAt() -> NSDate? {
-        var date: NSDate?
-        if let dateString = self.student["updatedAt"] as? String {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss.SSSSxxx"
-            date = dateFormatter.dateFromString(dateString)
-        }
-        return date
-        
-    }
+
     
 }

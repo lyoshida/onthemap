@@ -123,7 +123,7 @@ extension OTMClient {
     }
     
     // Retrives the list of students, saves it to the self.studentList variable and return the result to the completionHandler.
-    func getStudents(forceReload: Bool, completionHandler: (result: AnyObject?, errorString: NSError?) -> Void) {
+    func getStudents(forceReload: Bool, completionHandler: (result: [StudentInformation]?, errorString: NSError?) -> Void) {
         
         // If a studentList already exists return it. If self.studentList is nil or forceReload is true, retrieve the list of students.
         if forceReload == false && self.studentList != nil {
@@ -132,23 +132,39 @@ extension OTMClient {
         } else {
             
             let url: String = "\(OTMClient.Constants.parseApiUrl)"
+            
+            // Sorts the results by updatedAt descending
+            let params = ["order": "-updatedAt"]
             let headerParams: [String: String] = OTMClient.Constants.headerParams
-            let task = taskForParseGETMethod(url, parameters:nil) { result, error in
+            let task = taskForParseGETMethod(url, parameters:params) { result, error in
                 
                 if let error = error {
-                    completionHandler(result: result, errorString: error)
+                    
+                    completionHandler(result: nil, errorString: error)
+                    
                 } else {
-                    if let result = result as? NSDictionary {
-                        if var studentList = result["results"] as? NSArray {
-                            
-                            // Sorts student Array with updatedAt descending
-                            var descriptor: NSSortDescriptor = NSSortDescriptor(key: "updatedAt", ascending: false)
-                            let sortedResults: NSArray = studentList.sortedArrayUsingDescriptors([descriptor])
-
-                            self.studentList = sortedResults as? [AnyObject]
-                            completionHandler(result: self.studentList, errorString: nil)
+                    
+                    // Check for the error key in the result
+                    if let errorString = result["error"] as? String {
+                        
+                        completionHandler(result: nil, errorString: NSError())
+                        
+                    } else {
+                        
+                        if let result = result as? NSDictionary {
+                            if var results = result["results"] as? NSArray {
+                                
+                                // Clears the studentList array
+                                self.studentList = []
+                                for studentJson in results {
+                                    OTMClient.sharedInstance().studentList?.append(StudentInformation(studentJson: studentJson as! [String: AnyObject]))
+                                }
+                                
+                                completionHandler(result: self.studentList, errorString: nil)
+                            }
                         }
                     }
+                    
                 }
                 
             }
@@ -181,13 +197,14 @@ extension OTMClient {
                     if studentsList.count == 0 {
                         
                         completionHandler(result: nil, error: nil)
+                        
                     } else {
                         
                         if let userJson = studentsList[0] as? [String: AnyObject] {
                             
                             let userObj = StudentInformation(studentJson: userJson)
                             
-                            self.objectId = userObj.getObjectId()
+                            self.objectId = userObj.objectId
                             completionHandler(result: self.objectId, error: nil)
                             
                         } else {

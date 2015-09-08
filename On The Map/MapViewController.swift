@@ -75,19 +75,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
             } else {
                 
-                for studentJson in result as! [AnyObject] {
-                    
-                    let student = StudentInformation(studentJson: studentJson as! [String: AnyObject])
-                    
-                    let pin = MKPointAnnotation()
-                    pin.coordinate = CLLocationCoordinate2DMake(student.getLatitude(), student.getLongitude())
-                    pin.title = student.getFullName()
-                    pin.subtitle = student.getMediaURL()
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.mapView.addAnnotation(pin)
-                    })
-                    
+                if let students = result as [StudentInformation]? {
+                    for student in students {
+                        
+                        let pin = MKPointAnnotation()
+                        pin.coordinate = CLLocationCoordinate2DMake(student.latitude, student.longitude)
+                        pin.title = student.fullName
+                        pin.subtitle = student.mediaURL
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.mapView.addAnnotation(pin)
+                        })
+                        
+                    }
                 }
                 
             }
