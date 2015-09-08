@@ -30,9 +30,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             
             if let urlString = view.annotation.subtitle {
-                print(urlString)
                 if let url = NSURL(string: urlString) {
                     UIApplication.sharedApplication().openURL(url)
+                } else {
+                    println("Invalid URL")
+                    self.showErrorAlert("Error", message: "Invalid URL.", cancelButtonTitle: "Dismiss")
                 }
                 
             }
