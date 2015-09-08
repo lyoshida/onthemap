@@ -140,7 +140,9 @@ class MapViewLocationController: UIViewController {
             
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.presentViewController(alert, animated: true, completion: nil)
+        })
         
     }
     
