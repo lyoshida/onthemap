@@ -71,4 +71,15 @@ struct StudentInformation {
         return objectId
     }
     
+    func getUpdatedAt() -> NSDate? {
+        var date: NSDate?
+        if let dateString = self.student["updatedAt"] as? String {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss.SSSSxxx"
+            date = dateFormatter.dateFromString(dateString)
+        }
+        return date
+        
+    }
+    
 }

@@ -105,6 +105,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
             } else {
                 
+                // If user is found (already posted a location)
                 if let objId = result {
                     
                     var alert = UIAlertController(title: "Warning", message: "A previous location exists. Do you want to overwrite it?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -123,6 +124,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
+                    
+                } else {
+                    // If this is the first time the user posted a location
+                    let mapViewLocationcontroller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewLocationController") as! UIViewController
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.presentViewController(mapViewLocationcontroller, animated: true, completion: nil)
+                    })
                     
                 }
                 

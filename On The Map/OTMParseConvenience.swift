@@ -139,8 +139,13 @@ extension OTMClient {
                     completionHandler(result: result, errorString: error)
                 } else {
                     if let result = result as? NSDictionary {
-                        if let studentList = result["results"] as? [AnyObject] {
-                            self.studentList = studentList as? [AnyObject]
+                        if var studentList = result["results"] as? NSArray {
+                            
+                            // Sorts student Array with updatedAt descending
+                            var descriptor: NSSortDescriptor = NSSortDescriptor(key: "updatedAt", ascending: false)
+                            let sortedResults: NSArray = studentList.sortedArrayUsingDescriptors([descriptor])
+
+                            self.studentList = sortedResults as? [AnyObject]
                             completionHandler(result: self.studentList, errorString: nil)
                         }
                     }
@@ -173,16 +178,23 @@ extension OTMClient {
                 
                 if let studentsList: [AnyObject] = result.valueForKey("results") as? [AnyObject] {
                     
-                    if let userJson = studentsList[0] as? [String: AnyObject] {
-                        
-                        let userObj = StudentInformation(studentJson: userJson)
-                        
-                        self.objectId = userObj.getObjectId()
-                        completionHandler(result: self.objectId, error: nil)
-                    
-                    } else {
+                    if studentsList.count == 0 {
                         
                         completionHandler(result: nil, error: nil)
+                    } else {
+                        
+                        if let userJson = studentsList[0] as? [String: AnyObject] {
+                            
+                            let userObj = StudentInformation(studentJson: userJson)
+                            
+                            self.objectId = userObj.getObjectId()
+                            completionHandler(result: self.objectId, error: nil)
+                            
+                        } else {
+                            
+                            completionHandler(result: nil, error: nil)
+                            
+                        }
                         
                     }
                     

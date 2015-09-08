@@ -96,7 +96,7 @@ class MapViewLocationController: UIViewController {
                     
                 } else {
                     
-                    let mapViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MapView") as! UIViewController
+                    let mapViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! UITabBarController
                     dispatch_async(dispatch_get_main_queue(), {
                         self.presentViewController(mapViewController, animated: true, completion: nil)
                     })
@@ -117,7 +117,7 @@ class MapViewLocationController: UIViewController {
                     
                 } else {
                     
-                    let mapViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MapView") as! UIViewController
+                    let mapViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! UITabBarController
                     dispatch_async(dispatch_get_main_queue(), {
                         self.presentViewController(mapViewController, animated: true, completion: nil)
                     })
