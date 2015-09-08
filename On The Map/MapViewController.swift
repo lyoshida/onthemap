@@ -54,6 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let linkButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
             linkButton.frame.size.width = 44
             linkButton.frame.size.height = 44
+            linkButton.backgroundColor = UIColor.lightGrayColor()
             linkButton.setImage(UIImage(named: "pin"), forState: .Normal)
             
             annotationView.rightCalloutAccessoryView = linkButton
