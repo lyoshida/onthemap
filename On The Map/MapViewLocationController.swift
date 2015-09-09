@@ -189,7 +189,19 @@ class MapViewLocationController: UIViewController {
         })
     }
 
+    func locationTextBoxShouldReturn(textField: UITextField) -> Bool {
+        self.locationTextField.resignFirstResponder()
+        return true
+    }
     
+    func linkTextFieldShouldReturn(textField: UITextField) -> Bool {
+        self.linkTextField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
     
 }
 
